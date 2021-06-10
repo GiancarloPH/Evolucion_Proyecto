@@ -12,7 +12,7 @@ public class UribeBranch {
     public UribeBranch(String Nombre, String Apellido, String DNI, String Celular) {
         this.Nombre = Nombre;
         this.Apellido = Apellido;
-        this.DNI = DNI;
+        this.DNI = DNI + "DNI";
         this.Celular = Celular;
     }
 
