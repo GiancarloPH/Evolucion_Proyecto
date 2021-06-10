@@ -1,0 +1,127 @@
+/*TABLAS*/
+
+CREATE TABLE Cargos(
+	idCargo int NOT NULL,
+	Nombre varchar(50) 
+ );
+
+CREATE TABLE Categorias(
+	idCategoria int  NOT NULL,
+	nombre varchar(50),
+	Estado INT 
+);
+    
+CREATE TABLE Clientes(
+	idCliente varchar(10) NOT NULL,
+	Nombre varchar(50) NOT NULL,
+	Apellido varchar(50) ,
+	Nacimiento date ,
+	DNI varchar (10) ,
+	Estado INT
+);
+
+CREATE TABLE Compras(
+	idCompra varchar(10) NOT NULL,
+	IDproveedor varchar(10),
+	fecha date,
+	importetotal float
+);
+
+CREATE TABLE DetalleCompra(
+	idCompra varchar(10) NOT NULL,
+	idProducto varchar(10) NOT NULL,
+	cantidad int ,
+    PrecioUnit float,
+	Importe float 
+);
+
+CREATE TABLE DetalleVenta(
+	idVenta varchar(10) NOT NULL,
+	idProducto varchar(10) NOT NULL,
+	Cantidad int NOT NULL,
+    PrecioUnit float NOT NULL,
+	Importe float
+    );
+    
+CREATE TABLE Empleados(
+	idEmpleado varchar(10)  NOT NULL,
+	DNI varchar(10) NOT NULL,
+	Nombre varchar(50) ,
+	Apellido varchar(50) ,
+	Genero varchar(50) ,
+	Nacimiento date NOT NULL,
+	Telefono varchar(20) NOT NULL,
+	Correo varchar(100) NOT NULL,
+	Direccion varchar(100) NOT NULL,
+	Usuario varchar(50) NOT NULL,
+	Contraseña varchar(50) NOT NULL,
+	idCargo int NOT NULL,
+	Estado INT 
+
+); 
+
+CREATE TABLE Productos(
+	idProducto varchar(10) NOT NULL,
+	nombre varchar(50) NOT NULL,
+	descripcion varchar(50) ,
+	precioUnit float ,
+	Stock int ,
+	idCategoria int NOT NULL,
+	Estado INT 
+);
+
+CREATE TABLE Proveedores(
+	IDProveedor varchar(10) NOT NULL,
+	RUC varchar(20) NOT NULL,
+	NomEmpresa varchar(100) NOT NULL,
+	nombreContacto varchar(50) NOT NULL,
+	apellidoContacto varchar(50) NOT NULL,
+	telefonoContacto varchar(20) NOT NULL,
+    direccionEmpresa varchar(100) NOT NULL,
+	Estado INT
+);
+
+
+CREATE TABLE Ventas(
+	idVenta varchar(10) NOT NULL,
+	Fecha date ,
+	IdEmpleado varchar(10) ,
+    ImportTotal float ,
+	idCliente varchar(10)
+    );
+
+ALTER TABLE Cargos add CONSTRAINT PK_Cargo PRIMARY KEY (idCargo);
+ALTER TABLE Categorias add CONSTRAINT PK_Categoria PRIMARY KEY (idCategoria);
+ALTER TABLE Clientes add CONSTRAINT PK_Cliente PRIMARY KEY (idCliente);
+ALTER TABLE Compras add CONSTRAINT PK_Compra PRIMARY KEY (idCompra);
+ALTER TABLE Empleados add CONSTRAINT PK_Empleado PRIMARY KEY (idEmpleado);
+ALTER TABLE Productos add CONSTRAINT PK_Producto PRIMARY KEY (idProducto);
+ALTER TABLE Proveedores add CONSTRAINT PK_Proveedor PRIMARY KEY (IDProveedor);
+ALTER TABLE Ventas add CONSTRAINT PK_Venta PRIMARY KEY (idVenta);
+
+ALTER TABLE Compras ADD CONSTRAINT FK_Compra_Proveedor FOREIGN KEY(IDproveedor) REFERENCES Proveedores(IDProveedor);
+ALTER TABLE DetalleCompra ADD CONSTRAINT FK_DetalleCompra_Compra FOREIGN KEY(idcompra) REFERENCES Compras(idcompra);
+ALTER TABLE DetalleCompra ADD CONSTRAINT FK_DetalleCompra_Producto FOREIGN KEY(idProducto) REFERENCES Productos(idProducto);
+ALTER TABLE DetalleVenta ADD CONSTRAINT FK_DetalleVenta_Venta FOREIGN KEY(idVenta) REFERENCES Ventas(idVenta);
+ALTER TABLE DetalleVenta ADD CONSTRAINT FK_DetalleVenta_Produc FOREIGN KEY(idProducto) REFERENCES Productos(idProducto);
+ALTER TABLE Empleados ADD CONSTRAINT FK_Empleado_Cargo FOREIGN KEY(idCargo) REFERENCES Cargos(idCargo);
+ALTER TABLE Productos ADD CONSTRAINT FK_Producto_Categoria FOREIGN KEY(idCategoria) REFERENCES Categorias(idCategoria);
+
+ALTER TABLE Ventas ADD CONSTRAINT FK_Venta_Cliente FOREIGN KEY(idCliente) REFERENCES Clientes(idCliente);
+ALTER TABLE Ventas ADD CONSTRAINT FK_Venta_Empleado FOREIGN KEY(IdEmpleado) REFERENCES Empleados(idEmpleado);
+
+
+ALTER TABLE EMPLEADOS ADD CONSTRAINT UN_EMPLEADOS UNIQUE (DNI);
+ALTER TABLE EMPLEADOS ADD CONSTRAINT UN_EMPLEADOTE UNIQUE (Telefono);
+ALTER TABLE EMPLEADOS ADD CONSTRAINT UN_EMPLEADOCO UNIQUE (Correo);
+ALTER TABLE EMPLEADOS ADD CONSTRAINT UN_EMPLEADOUSU UNIQUE (Usuario);
+
+
+ALTER TABLE PROVEEDORES ADD CONSTRAINT UN_PROVERUC UNIQUE (RUC);
+ALTER TABLE PROVEEDORES ADD CONSTRAINT UN_PROVETELF UNIQUE (telefonoContacto);
+ALTER TABLE PROVEEDORES ADD CONSTRAINT UN_PROVEEMPRE UNIQUE (NomEmpresa);
+
+ALTER TABLE CLIENTES ADD CONSTRAINT UN_CLIENTEDNI UNIQUE (DNI);
+
+
+
