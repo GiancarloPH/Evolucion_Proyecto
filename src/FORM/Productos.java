@@ -15,30 +15,29 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Productos extends javax.swing.JFrame {
-      PRODUCTOS tempro=new PRODUCTOS();
-      LPRODUCTOS p=new LPRODUCTOS();
-      CATEGORIA cat=new CATEGORIA();
-      LCATEGORIA c=new LCATEGORIA();
-      conexion cone=new conexion();
+      PRODUCTOS tempro =new PRODUCTOS();
+      LPRODUCTOS p =new LPRODUCTOS();
+      CATEGORIA cat =new CATEGORIA();
+      LCATEGORIA c =new LCATEGORIA();
+      conexion cone =new conexion();
       
-      ProductoFactory pfactory = new ProductoFactory(new LPRODUCTOS());
-      CategoriaFactory cfactory = new CategoriaFactory(new LCATEGORIA());
-      
-       void listarTipo() {
-       try {
-             c.consultarcategoria();
+      ProductoFactory pfactory =new ProductoFactory(new LPRODUCTOS());
+      CategoriaFactory cfactory =new CategoriaFactory(new LCATEGORIA());
+      //listar tipo de producto en el cbo
+       void listarTipo(){
+       try{
+           c.consultarcategoria();
              /*
              INTERFAZ EL DIA 5/5/2021 
              AUTORES: EQUIPO DE EVOLUCION
              */
              /*cfactory.consultarCategoriaNuevo();*/
-             
-             for (int i = 0; i < LCATEGORIA.LCT.size(); i++) {
-                 cat =(CATEGORIA)LCATEGORIA.LCT.get(i);
+             for(int i = 0; i < LCATEGORIA.LCT.size(); i++) {
+                 cat = (CATEGORIA)LCATEGORIA.LCT.get(i);
                  cboCategoria.addItem(cat.getNombre());
                  cboCategoria.setSelectedIndex(cat.getCodigo()); 
              }
-        } catch (Exception ex) {
+        } catch(Exception ex) {
       }
     }
        
@@ -54,19 +53,19 @@ public class Productos extends javax.swing.JFrame {
             tabla.addColumn("Precio Unitario");
             tabla.addColumn("Stock");
             tabla.addColumn("Categoria");
-            cone.consulta("Select * from listarProductos");
-            Object dato[] = new Object[6];
-            while (cone.getRs().next()) {
-                for (int i = 0; i < 6; i++) {
-                    dato[i] = cone.getRs().getString(i + 1);
+            cone.consulta( "Select * from listarProductos");
+            Object dato[]= new Object[6];
+            while(cone.getRs().next()) {
+                for(int i = 0; i < 6; i++) {
+                    dato[i]= cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
             }
             this.tblProductos.setModel(tabla);
             editTabla();
-            
-        } catch (Exception e) {
-          JOptionPane.showMessageDialog(null, "error tablaPRODUC   " + e);
+           
+        } catch(Exception e) {
+          JOptionPane.showMessageDialog(null,"error tablaPRODUC   " + e);
         }
     }
 
@@ -84,33 +83,33 @@ public class Productos extends javax.swing.JFrame {
         PanelCategoria.setVisible(false);
     }
 
-   
-    void buscarProducto() {
-        DefaultTableModel tabla = new DefaultTableModel();
-        try {
+   //busqueda de informacion en el frame de productos
+    void buscarProducto(){
+        DefaultTableModel tabla =new DefaultTableModel();
+        try{
             tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
             tabla.addColumn("Descripcion");
             tabla.addColumn("Precio Unitario");
             tabla.addColumn("Stock");
             tabla.addColumn("Categoria");
-            String letra=txtBuscar.getText();
-            cone.consulta("  Select * from listarProductos\n" +
+            String letra = txtBuscar.getText();
+            cone.consulta( "Select * from listarProductos\n" +
             "    WHERE ESTADO=1 \n" +
             "    AND (REGEXP_LIKE( LOWER(NOMBRE),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(Descripcion),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(preciounit),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(CATGEORIA),LOWER('"+letra+"+')))");
-             Object dato[] = new Object[6];
-             while(cone.getRs().next()){
-                for (int i = 0; i < 6; i++) {
-                    dato[i] = cone.getRs().getString(i + 1);
+             Object dato[] =new Object[6];
+             while (cone.getRs().next()){
+                for  (int i = 0; i < 6; i++) {
+                    dato[i]= cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
              } 
             this.tblProductos.setModel(tabla);
             editTabla();
-        } catch (Exception e) {
+        } catch(Exception e) {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
@@ -169,7 +168,7 @@ public class Productos extends javax.swing.JFrame {
         setOpacity(0.95F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -609,13 +608,13 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        if (txtNombre.getText().equals("") || txtDescripcion.getText().equals("") || txtPrecioUnit.getText().equals("") || cboCategoria.getSelectedItem() == "Seleccionar") {
-            JOptionPane.showMessageDialog(this, "Tiene que llenar Todos Los Campos");
-        } else {
-            try {
+//boton agregar para producto
+        if(txtNombre.getText().equals("") || txtDescripcion.getText().equals("") || txtPrecioUnit.getText().equals("") || cboCategoria.getSelectedItem() == "Seleccionar") {
+            JOptionPane.showMessageDialog(this, "Tiene que completar todos los campos");
+        } else{
+            try{
                    
-                   PRODUCTOS ins = new PRODUCTOS();
+                   PRODUCTOS ins =new PRODUCTOS();
                    ins.setNombre(txtNombre.getText());
                    ins.setDescripcion(txtDescripcion.getText());
                    ins.setPrecio(Double.parseDouble(txtPrecioUnit.getText()));
@@ -629,7 +628,7 @@ public class Productos extends javax.swing.JFrame {
                  
                    listarProducto();
 
-            } catch (Exception ex) {
+            } catch(Exception ex) {
                 //JOptionPane.showMessageDialog(this, "Producto Registrado correctamente!!" + ex.getMessage());
             }
         }
@@ -637,15 +636,13 @@ public class Productos extends javax.swing.JFrame {
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         Select1();
-        int row = tblProductos.getSelectedRow();
-        txtcodigo.setText(tblProductos.getValueAt(row, 0).toString());
-        txtNombre.setText(tblProductos.getValueAt(row, 1).toString());
-        txtDescripcion.setText(tblProductos.getValueAt(row, 2).toString());
-        txtPrecioUnit.setText(tblProductos.getValueAt(row, 3).toString());
-        txtStock.setText(tblProductos.getValueAt(row, 4).toString());
-        cboCategoria.setSelectedItem(tblProductos.getValueAt(row, 5).toString());
-        
-
+        int row= tblProductos.getSelectedRow();
+        txtcodigo.setText(tblProductos.getValueAt(row,0).toString());
+        txtNombre.setText(tblProductos.getValueAt(row,1).toString());
+        txtDescripcion.setText(tblProductos.getValueAt(row,2).toString());
+        txtPrecioUnit.setText(tblProductos.getValueAt(row,3).toString());
+        txtStock.setText(tblProductos.getValueAt(row,4).toString());
+        cboCategoria.setSelectedItem(tblProductos.getValueAt(row,5).toString());
     }//GEN-LAST:event_tblProductosMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -655,33 +652,31 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-     int row = tblProductos.getSelectedRow();
-
-     if (row == -1) {
-         JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Registro");
-     
-     } else {
-            try {
-                 PRODUCTOS delP=new PRODUCTOS();
+     int row =tblProductos.getSelectedRow();
+     if(row == -1) {
+         JOptionPane.showMessageDialog(this,"No Ha Selecionado Un Registro");
+     } else{
+            try{
+                 PRODUCTOS delP =new PRODUCTOS();
                  delP.setCodigo(txtcodigo.getText());
                 //p.eliminarproductos(delP);
                 p.eliminarproductos(delP);
                  listarProducto();
                  limpiar();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Eliminacion", JOptionPane.ERROR_MESSAGE);
-
+            } catch(Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(),"Eliminacion", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        int row = tblProductos.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Registro");
-        } else {
-           try {
-                  PRODUCTOS upd=new PRODUCTOS();
+       //boton actualizar
+        int row =tblProductos.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(this,"No Ha Selecionado Un Registro");
+        } else{
+           try{
+                  PRODUCTOS upd = new PRODUCTOS();
                   upd.setCodigo(txtcodigo.getText());
                   upd.setNombre(txtNombre.getText());
                   upd.setDescripcion(txtDescripcion.getText());
@@ -692,12 +687,10 @@ public class Productos extends javax.swing.JFrame {
                 INTERFAZ EL DIA 5/5/2021 
                 AUTORES: EQUIPO DE EVOLUCION
                 */
-                pfactory.actualizarProductoNuevo(upd);
-                
-                
+                pfactory.actualizarProductoNuevo(upd); 
                   listarProducto();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente"+ex);
+            } catch(Exception ex) {
+                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente!!!"+ex);
             }
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -707,7 +700,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void txtPrecioUnitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioUnitKeyTyped
-       char car = evt.getKeyChar();
+       char car= evt.getKeyChar();
         if (txtPrecioUnit.getText().length() >= 4) {
             evt.consume();
         }
@@ -749,41 +742,37 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarUnaNuevaCategoriaActionPerformed
 
     private void btnAgregarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCategoriaActionPerformed
-      String cates = txtNombreCategoria.getText();
-        if (cates.equals("")) {
-            JOptionPane.showMessageDialog(this, "Tiene que llenar el nombre de la categoria para registrar...");
-        } else {
-           try {
-               CATEGORIA ins = new CATEGORIA();
+      String cates =txtNombreCategoria.getText();
+        if(cates.equals("")) {
+            JOptionPane.showMessageDialog(this,"Tiene que completar el nombre de la categoria para poder registrar...");
+        } else{
+           try{
+               CATEGORIA ins= new CATEGORIA();
                  ins.setNombre(txtNombreCategoria.getText());
                  c.insertarcate(ins);
-                 
                  PanelCategoria.setVisible(false);
                  listarTipo();  
-                 
-           } catch (Exception ex) {
-
+           } catch(Exception ex) {
            }
     }
     }//GEN-LAST:event_btnAgregarCategoriaActionPerformed
 
     private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
-        String cate = txtNombreCategoria.getText();
+        //boton para eliminar una categoria
+        String cate =txtNombreCategoria.getText();
 
-        if (cate.equals("")) {
-            JOptionPane.showMessageDialog(this, "Tiene que ingresar el nombre de la categoria para eliminar");
-        } else {
-          try {
-                 CATEGORIA delcate=new CATEGORIA();
+        if(cate.equals("")) {
+            JOptionPane.showMessageDialog(this, "Tiene que ingresar el nombre de la categoria para poder eliminar");
+        } else{
+          try{
+                 CATEGORIA delcate =new CATEGORIA();
                  delcate.setNombre(txtNombreCategoria.getText());
                  c.eliminarCATEGORIA(delcate);
-                  PanelCategoria.setVisible(false);  
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Eliminacion", JOptionPane.ERROR_MESSAGE);
-
+                 PanelCategoria.setVisible(false);  
+            } catch(Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(),"Eliminacion", JOptionPane.ERROR_MESSAGE);
             }
         }
-
     }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
     private void cboCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCategoriaActionPerformed
@@ -791,16 +780,14 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_cboCategoriaActionPerformed
 
     private void cboCategoriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboCategoriaItemStateChanged
-        
-        try{
-         String nom=cboCategoria.getSelectedItem()+"";
-         cone.consulta("Select * from categorias where nombre='"+nom+"' ");
-        while (cone.getRs().next()) {
-            this.txtCodigoCate.setText( cone.getRs().getString(1));
-           }
-         }catch(Exception ex){
+        //combobox categoria
+        try {
+         String nom = cboCategoria.getSelectedItem()+"";
+         cone.consulta( "Select * from categorias where nombre='"+nom+"' ");
+        while(cone.getRs().next()) {
+            this.txtCodigoCate.setText(cone.getRs().getString(1)); }
+         }catch (Exception ex){
         }     
-        
     }//GEN-LAST:event_cboCategoriaItemStateChanged
 
     public static void main(String args[]) {

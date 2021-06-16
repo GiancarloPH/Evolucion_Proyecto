@@ -12,13 +12,13 @@ public class CategoriaFactory {
         this.categoria = categoria;
     }
     
-    public void insertarCategoriaNuevo(CATEGORIA temp){
-        categoria.insertarcate(temp);
+    public void insertarCategoriaNuevo (CATEGORIA temp){
+        categoria.insertarcate (temp);
     }
-    public void eliminarCategoriaNuevo(CATEGORIA temp){
-        categoria.eliminarCATEGORIA(temp);
+    public void eliminarCategoriaNuevo( CATEGORIA temp){
+        categoria.eliminarCATEGORIA (temp);
     }
-    public void consultarCategoriaNuevo(){
+    public void consultarCategoriaNuevo (){
         categoria.consultarcategoria();
     }
     

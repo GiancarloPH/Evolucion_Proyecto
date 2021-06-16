@@ -13,9 +13,10 @@ public class LEMPLEADO implements IE{
     conexion con=new conexion();
     
     @Override 
-      public void insertarempleado(EMPLEADOS temp){
-        try{
-         cc=con.getCon().prepareCall("{call ins_empleados(?,?,?,?,?,?,?,?,?,?,?)}");
+    //insertar empleados
+      public void insertarempleado (EMPLEADOS temp){
+        try {
+         cc =con.getCon().prepareCall( "{call ins_empleados(?,?,?,?,?,?,?,?,?,?,?)}");
             cc.setString(1,temp.getDNI());
             cc.setString(2,temp.getNombre());
             cc.setString(3,temp.getApellido());
@@ -27,28 +28,28 @@ public class LEMPLEADO implements IE{
             cc.setString(9,temp.getUsuario());
             cc.setString(10,temp.getContraseña());
             cc.setInt(11,temp.getIdcargo());
-             int respuesta = cc.executeUpdate();
-            if (respuesta == 1) {
-                    JOptionPane.showMessageDialog(null, "Empleado Registrado correctamente!!", "Registro", JOptionPane.INFORMATION_MESSAGE);
+             int respuesta= cc.executeUpdate();
+            if(respuesta == 1) {
+                    JOptionPane.showMessageDialog(null,"Empleado se ha registrado correctamente!!", "Registro", JOptionPane.INFORMATION_MESSAGE);
                 }
-              
-        } catch (Exception e) {
-         JOptionPane.showMessageDialog(null,"ERROR INGRESO EMPLEADO"+ e.getMessage());
+        } catch(Exception e) {
+         JOptionPane.showMessageDialog(null,"ERROR REGISTRO DE EMPLEADO"+ e.getMessage());
         }
     } 
       
     @Override 
-    public void eliminarempleados(EMPLEADOS temp){
-        try {
-            cc=con.getCon().prepareCall("{call DEL_EMPLEADO(?,?)}");
+    //RETIRAR EMPLEADO
+    public void eliminarempleados (EMPLEADOS temp){
+        try{
+            cc =con.getCon().prepareCall("{call DEL_EMPLEADO(?,?)}");
             cc.setString(1, temp.getCodigo());
             cc.setString(2, temp.getUsuario());
-            int respuesta = cc.executeUpdate();
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null, "Empleado Eliminado", "Eliminacion", JOptionPane.INFORMATION_MESSAGE);
+            int respuesta =cc.executeUpdate();
+                if (respuesta == 1){
+                    JOptionPane.showMessageDialog(null,"Empleado RETIRADO", "RETIRO", JOptionPane.INFORMATION_MESSAGE);
                 }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"ERROR ELIMINAR EMPLEADO"+ e.getMessage());
+            JOptionPane.showMessageDialog(null,"ERROR AL RETIRAR EMPLEADO"+ e.getMessage());
         }
     }
    /* public void buscarE(String L){
@@ -82,9 +83,10 @@ public class LEMPLEADO implements IE{
     }*/
     
     @Override
-    public void actualizarEmpleado(EMPLEADOS temp){
-        try {
-            cc=con.getCon().prepareCall("{call upd_EMPLEADO(?,?,?,?,?,?,?,?,?,?,?,?)}");
+    //ACTUALIZAR EMPLEADOS
+    public void actualizarEmpleado (EMPLEADOS temp){
+        try{
+            cc=con.getCon().prepareCall( "{call upd_EMPLEADO(?,?,?,?,?,?,?,?,?,?,?,?)}");
             cc.setString(1, temp.getCodigo());
             cc.setString(2,temp.getDNI());
             cc.setString(3,temp.getNombre());
@@ -97,43 +99,34 @@ public class LEMPLEADO implements IE{
             cc.setString(10,temp.getUsuario());
             cc.setString(11,temp.getContraseña());
             cc.setInt(12,temp.getIdcargo());
-            int respuesta = cc.executeUpdate();
-                if (respuesta == 1) {
-                    JOptionPane.showMessageDialog(null, "Empleado Modificado Correctamente", "Modificando", JOptionPane.INFORMATION_MESSAGE);
+            int respuesta= cc.executeUpdate();
+                if(respuesta == 1) {
+                    JOptionPane.showMessageDialog(null,"Empleado ha sido modificado correctamente!!", "Modificando", JOptionPane.INFORMATION_MESSAGE);
                 }
             
-        } catch (Exception e) {
-             System.err.println("ERROR ACTUALIZAR EMPLEADO"+ e.getMessage());
+        } catch(Exception e) {
+             System.err.println("ERROR AL ACTUALIZAR EMPLEADO"+ e.getMessage());
         }
     }
     
     @Override
-    public void consultar(){
-        try {
-            con.consulta("select * from empleados WHERE estado<>0");
+    //CONSULTAR EMPLEDOS
+    public void consultar (){
+        try{
+            con.consulta( "select * from empleados WHERE estado<>0");
             LEmp.clear();
-            while (con.getRs().next()) {                                
-                EMPLEADOS temp=new EMPLEADOS(
-               con.getRs().getString(1),
-                con.getRs().getString(2),
-                con.getRs().getString(3), 
-                con.getRs().getString(4),
-                con.getRs().getString(5), 
-                con.getRs().getString(6),
-                con.getRs().getString(7), 
-                con.getRs().getString(8),
-                con.getRs().getString(9), 
-                con.getRs().getString(10),
-                con.getRs().getString(11),
-                Integer.parseInt(con.getRs().getString(12)),
-                con.getRs().getString(13));
+            while(con.getRs().next()) {                                
+                EMPLEADOS temp =new EMPLEADOS( con.getRs().getString(1), con.getRs().getString(2),
+                con.getRs().getString(3),  con.getRs().getString(4),con.getRs().getString(5), 
+                con.getRs().getString(6), con.getRs().getString(7),con.getRs().getString(8),
+                con.getRs().getString(9),  con.getRs().getString(10),con.getRs().getString(11),
+                Integer.parseInt(con.getRs().getString(12)),con.getRs().getString(13));
                 LEmp.add(temp);   
               //  System.err.println(temp.getNacimiento());
             }
-        } catch (Exception e) {
+        } catch(Exception e) {
         }
-    }
-    
+    }  
 }
 
 

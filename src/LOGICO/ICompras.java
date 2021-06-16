@@ -13,8 +13,8 @@ import DATOS.DETCOMPRA;
  * @author Crist
  */
 public interface ICompras {
+    
     public void insertarcompra(COMPRA temp);
     public void insertardetcompra(DETCOMPRA det);
-    public void consulta();
-    
+    public void consulta();   
 }

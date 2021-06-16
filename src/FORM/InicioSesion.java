@@ -63,7 +63,7 @@ public class InicioSesion extends javax.swing.JFrame {
         setOpacity(0.8F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 51));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {

@@ -16,5 +16,4 @@ public interface IClientes {
     public void eliminarcliente(CLIENTES temp);
     public void actualizarcli(CLIENTES temp);
     public void consultar();
-    
 }

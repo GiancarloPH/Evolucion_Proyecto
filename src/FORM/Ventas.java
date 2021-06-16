@@ -50,7 +50,7 @@ public class Ventas extends javax.swing.JFrame {
         calculatTotal();
         noeditarcalendario();
     }
-
+//listar  clientes
     void listarCliente() {
         txtCodigoEmpleado.setVisible(false);
         txtCodigoProducto.setVisible(false);
@@ -59,21 +59,17 @@ public class Ventas extends javax.swing.JFrame {
         txtCodCliente.setVisible(false);
         DefaultTableModel tabla = new DefaultTableModel();
         try {
-
             tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
             tabla.addColumn("Apellido");
             tabla.addColumn("Nacimiento");
             tabla.addColumn("DNI");
-            
         lc.consultar();
         /*
         INTERFAZ EL DIA 5/5/2021 
         AUTORES: EQUIPO DE EVOLUCION
         */
-        
-        //vfactory.consultaVentaNuevo();
-        
+
             Object dato[] = new Object[7];
            for (int i = 0; i < LCLIENTES.LCLI.size(); i++) {
                 c =(CLIENTES)LCLIENTES.LCLI.get(i);
@@ -90,63 +86,61 @@ public class Ventas extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
-
+//filtrado de la informacion de los clientes
     void BuscarCliente() {
         DefaultTableModel tabla = new DefaultTableModel();
         try {
-
             tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
             tabla.addColumn("Apellido");
             tabla.addColumn("Nacimiento");
             tabla.addColumn("DNI");
-            String letra=txtBuscarClientes.getText();
-            cone.consulta("  Select * from listarcliente\n" +
+            String letra =txtBuscarClientes.getText();
+            cone.consulta(" Select * from listarcliente\n" +
             "    WHERE ESTADO=1 \n" +
             "    AND (REGEXP_LIKE( LOWER(nm),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(ap),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(dn),LOWER('"+letra+"+')))");
-             Object dato[] = new Object[5];
-             while(cone.getRs().next()){
-                for (int i = 0; i < 5; i++) {
-                    dato[i] = cone.getRs().getString(i + 1);
+             Object dato[]= new Object[5];
+             while (cone.getRs().next()){
+                for(int i = 0; i < 5; i++) {
+                   dato[i] =cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
              } 
             this.tblCliente.setModel(tabla);
             // editTabla();
-        } catch (Exception e) {
+        } catch(Exception e) {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
-
-    void listarProducto() {
-        DefaultTableModel tabla = new DefaultTableModel();
+//listar productos en la tabla
+    void listarProducto(){
+        DefaultTableModel tabla= new DefaultTableModel();
         try {
-
             tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
             tabla.addColumn("Descripcion");
             tabla.addColumn("Precio Unitario");
             tabla.addColumn("Stock");
             tabla.addColumn("Categoria");
-           cone.consulta("Select * from listarProductos");
-            Object dato[] = new Object[6];
-            while (cone.getRs().next()) {
-                for (int i = 0; i < 6; i++) {
-                    dato[i] = cone.getRs().getString(i + 1);
+           cone.consulta( "Select * from listarProductos");
+            Object dato[] =new Object[6];
+            while(cone.getRs().next()) {
+                for(int i = 0; i < 6; i++) {
+                    dato[i] =cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
             }
             this.tblProductos.setModel(tabla);
             // editTabla();
-        } catch (Exception e) {
+        } catch(Exception e) {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
-
-    void buscarProducto() {
-        DefaultTableModel tabla = new DefaultTableModel();
+//filtrado de la informacion de productos en el frame de ventas
+    void buscarProducto(){
+        DefaultTableModel tabla= new DefaultTableModel();
         try {
             tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
@@ -154,23 +148,23 @@ public class Ventas extends javax.swing.JFrame {
             tabla.addColumn("Precio Unitario");
             tabla.addColumn("Stock");
             tabla.addColumn("Categoria");
-            String letra=txtBuscarProductos.getText();
-            cone.consulta("  Select * from listarProductos\n" +
+            String letra = txtBuscarProductos.getText();
+            cone.consulta( "Select * from listarProductos\n" +
             "    WHERE ESTADO=1 \n" +
             "    AND (REGEXP_LIKE( LOWER(NOMBRE),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(Descripcion),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(preciounit),LOWER('"+letra+"+'))\n" +
             "    OR REGEXP_LIKE( LOWER(CATGEORIA),LOWER('"+letra+"+')))");
-             Object dato[] = new Object[6];
-             while(cone.getRs().next()){
-                for (int i = 0; i < 6; i++) {
-                    dato[i] = cone.getRs().getString(i + 1);
+             Object dato[]=new Object[6];
+             while (cone.getRs().next()){
+                for(int i = 0; i < 6; i++) {
+                    dato[i]=cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
              } 
             this.tblProductos.setModel(tabla);
             // editTabla();
-        } catch (Exception e) {
+        }catch(Exception e) {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
@@ -282,7 +276,7 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 204, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -676,13 +670,11 @@ public class Ventas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PanleAgregarClienteLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jToggleButton3))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanleAgregarClienteLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jToggleButton4)))
+                            .addGroup(PanleAgregarClienteLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jToggleButton3)
+                                    .addComponent(jToggleButton4, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(PanleAgregarClienteLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1077,7 +1069,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-
+//boton quitar
         if (tblVenta.getSelectedRow() != -1) {
             model.removeRow(tblVenta.getSelectedRow());
             calculatTotal();
@@ -1093,32 +1085,31 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAñadirMouseClicked
+        //boton añadir
         try {
-            int cant= Integer.parseInt(txtCantidad.getText());
-            int stock = Integer.parseInt(txtStock.getText());
+            int cant=Integer.parseInt(txtCantidad.getText());
+            int stock =Integer.parseInt(txtStock.getText());
             
-            if (stock == 0  || cant>= stock) {
-                JOptionPane.showMessageDialog(this, "Producto agotado o supera cantidad de stock");
-                 paneles();
-            } else {
-                if (txtCodCliente.getText().equals("") || txtCodigoProducto.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Cliente o Un Producto...");
-                     paneles();
+            if(stock == 0  || cant>= stock) {
+                JOptionPane.showMessageDialog(this,"Producto agotado o supera cantidad de stock");
+                paneles();
+            }else{
+                if(txtCodCliente.getText().equals("") || txtCodigoProducto.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "No Ha Selecionado un Cliente o Un Producto...!!!");
+                    paneles();
                 } else if (txtCantidad.getText().equals("")) {
-                    JOptionPane.showMessageDialog(this, "No Ha Ingresando Una Cantidad A vender...");
-                     paneles();
-                    
+                    JOptionPane.showMessageDialog(this, "No Ha Ingresando Una Cantidad A vender...!!!");
+                     paneles(); 
                 } else {
-
-                    model = (DefaultTableModel) tblVenta.getModel();
-                    String codClie = txtCodCliente.getText();
-                    String codproducto = txtCodigoProducto.getText();
-                    String Cliente = txtCliente.getText();
-                    String producto = txtProducto.getText();
-                    int Cant = Integer.parseInt(txtCantidad.getText());
-                    double pre = Double.parseDouble(txtPrecio.getText());
-                    double total = Cant * pre;
-                    ArrayList lista = new ArrayList();
+                    model =(DefaultTableModel) tblVenta.getModel();
+                    String codClie =txtCodCliente.getText();
+                    String codproducto =txtCodigoProducto.getText();
+                    String Cliente =txtCliente.getText();
+                    String producto =txtProducto.getText();
+                    int Cant =Integer.parseInt(txtCantidad.getText());
+                    double pre =Double.parseDouble(txtPrecio.getText());
+                    double total =Cant*pre;
+                    ArrayList lista =new ArrayList();
                     lista.add(codproducto);
                     lista.add(codClie);
                     lista.add(Cliente);
@@ -1126,16 +1117,16 @@ public class Ventas extends javax.swing.JFrame {
                     lista.add(Cant);
                     lista.add(pre);
                     lista.add(total);
-                    validar();
-                    Object[] ob = new Object[7];
-                    ob[0] = lista.get(0);
-                    ob[1] = lista.get(1);
-                    ob[2] = lista.get(2);
-                    ob[3] = lista.get(3);
-                    ob[4] = lista.get(4);
-                    ob[5] = lista.get(5);
-                    ob[6] = lista.get(6);
-                    model.addRow(ob);
+                     validar();
+                    Object[] ob= new Object[7];
+                    ob[0]= lista.get(0);
+                    ob[1]= lista.get(1);
+                    ob[2]= lista.get(2);
+                    ob[3]= lista.get(3);
+                    ob[4]= lista.get(4);
+                    ob[5]= lista.get(5);
+                    ob[6]= lista.get(6);
+                     model.addRow(ob);
                     tblVenta.setModel(model);
                     calculatTotal();
                 }
@@ -1152,11 +1143,11 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProductoKeyTyped
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
-         char car = evt.getKeyChar();
+         char car=evt.getKeyChar();
         if (txtCantidad.getText().length() >= 5) {
             evt.consume();
         }
-          if ((car < '0' || car > '9')){
+          if ((car< '0' || car > '9')){
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
@@ -1165,39 +1156,36 @@ public class Ventas extends javax.swing.JFrame {
 
         try {
 
-            if (tblVenta.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "No Ha Añadido Un Producto A La lista...");
-            } else {
-                String cod="";
-                try {
-                    VENTAS comp= new VENTAS();
+            if(tblVenta.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "No Ha Añadido Un Producto A La lista...!!!");
+            } else{
+                String cod ="";
+                try{
+                    VENTAS comp=new VENTAS();
                     comp.setIdEmpleado(txtCodigoEmpleado.getText());
                     comp.setImportTotal(Float.parseFloat(txtImporteTotal.getText()));
-                   
                     comp.setIdCliente(txtCodCliente.getText());
-                   
-                   // lv.insertarventa(comp);
                    /*
                    INTERFAZ EL DIA 5/5/2021 
                    AUTORES: EQUIPO DE EVOLUCION
                    */
                    vfactory.insertarVentaNuevo(comp);
                    
-               } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error en generar venta " + ex.getMessage());
+               } catch(Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error al generar la venta " + ex.getMessage());
                      paneles();
                 }
-                for(int i = 0; i < tblVenta.getRowCount(); i++) {
-                    String idp = tblVenta.getValueAt(i,0).toString();
-                    int cant = Integer.parseInt(tblVenta.getValueAt(i, 4).toString());
-                    Float pre = Float.parseFloat(tblVenta.getValueAt(i, 5).toString());
-                    try { 
-                         cone.consulta("select idventa from VENTAS \n" +
-                         "where idventa in(select max(idventa) from VENTAS)");
-                          while (cone.getRs().next()) {
-                          cod= cone.getRs().getString(1);
+                for (int i = 0; i < tblVenta.getRowCount(); i++) {
+                    String idp= tblVenta.getValueAt(i,0).toString();
+                    int cant =Integer.parseInt(tblVenta.getValueAt(i, 4).toString());
+                    Float pre =Float.parseFloat(tblVenta.getValueAt(i, 5).toString());
+                    try{ 
+                         cone.consulta( "select idventa from VENTAS \n" +
+                          "where idventa in(select max(idventa) from VENTAS)");
+                          while(cone.getRs().next()) {
+                          cod = cone.getRs().getString(1);
                          }
-                        DETALLEVENTA dcomp = new DETALLEVENTA();
+                        DETALLEVENTA dcomp= new DETALLEVENTA();
                         dcomp.setIdVenta(cod);
                         dcomp.setIdProducto(idp);
                         dcomp.setCantidad(cant);
@@ -1208,20 +1196,20 @@ public class Ventas extends javax.swing.JFrame {
                      AUTORES: EQUIPO DE EVOLUCION
                      */
                      vfactory.insertardetVentaNuevo(dcomp);
-               } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error en generar detventa " + ex.getMessage());
+               } catch(Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Error en Generar detventa " + ex.getMessage());
                          paneles();
                     }
                 }
                 calculatTotal();
-                JOptionPane.showMessageDialog(this, "Se Realizo con Exito");
+                JOptionPane.showMessageDialog(this, "Se realizo con Exito");
                 panelcli.setVisible(true);
                 nuevo();
                 listarProducto();
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null,"Error: " + e.getMessage());
         }
 
     }//GEN-LAST:event_btnGeneraCompraMouseClicked
@@ -1231,22 +1219,21 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarProductosKeyPressed
 
     private void txtBuscarProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarProductosKeyTyped
-        if (txtBuscarProductos.getText().length() >= 20) {
+        if(txtBuscarProductos.getText().length() >= 20) {
             evt.consume();
         }
     }//GEN-LAST:event_txtBuscarProductosKeyTyped
 
     private void txtBuscarClientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClientesKeyPressed
-
         BuscarCliente();
     }//GEN-LAST:event_txtBuscarClientesKeyPressed
 
     private void txtBuscarClientesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarClientesKeyTyped
-        if (txtBuscarClientes.getText().length() >= 20) {
+        if(txtBuscarClientes.getText().length() >= 20) {
             evt.consume();
         }
     }//GEN-LAST:event_txtBuscarClientesKeyTyped
-   LOGIN log=new LOGIN();
+    LOGIN log = new LOGIN();
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
         txtCodigoEmpleado.setText(String.valueOf(log.getCodigo()));
@@ -1255,12 +1242,10 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
 
-        if (PanleAgregarCliente.isVisible()) {
+        if(PanleAgregarCliente.isVisible()) {
             PanleAgregarCliente.setVisible(false);
             panelcli.setVisible(true);
-
-        } else {
-
+        } else{
             panelcli.setVisible(false);
             PanleAgregarCliente.setVisible(true);
 
@@ -1323,7 +1308,7 @@ public class Ventas extends javax.swing.JFrame {
           listarCliente();
           limpiar();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Ingreso Doble", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(),"Ingreso Doble", JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_jToggleButton3MouseClicked
@@ -1334,13 +1319,12 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         
-        int row = tblCliente.getSelectedRow();
-
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Registro");
-        }else {
-              int i= JOptionPane.showConfirmDialog(null, "Seguro de Eliminar Cliente?");
-            if(i==0){
+        int row= tblCliente.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(this, "No ha selecionado un registro");
+        }else{
+              int i= JOptionPane.showConfirmDialog(null, "¿Seguro de eliminar cliente?");
+            if (i==0){
                 try {
                  CLIENTES delc=new CLIENTES();
                  delc.setIDCLIENTE(txtCodCliente.getText());
@@ -1348,11 +1332,10 @@ public class Ventas extends javax.swing.JFrame {
                  listarCliente();
                  limpiar();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Eliminacion", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(),"Eliminacion", JOptionPane.ERROR_MESSAGE);
             }
-            
             }else {
-                  JOptionPane.showMessageDialog(this, "No se elimino");
+                  JOptionPane.showMessageDialog(this,"No se elimino");
                    listarCliente();
                    limpiarTabla();
         }
@@ -1364,12 +1347,12 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-      int row = tblCliente.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Registro");
-        } else {
-            try {
-               String fechnc=((JTextField) txtFechaNac.getDateEditor().getUiComponent()).getText();
+      int row= tblCliente.getSelectedRow();
+        if(row == -1) {
+            JOptionPane.showMessageDialog(this, "No ha selecionado un registro");
+        } else{
+            try{
+               String fechnc =((JTextField) txtFechaNac.getDateEditor().getUiComponent()).getText();
                  CLIENTES upd = new CLIENTES();
                  upd.setIDCLIENTE(txtCodCliente.getText());
                  upd.setNOMBRE(txtNombre.getText());
@@ -1379,10 +1362,9 @@ public class Ventas extends javax.swing.JFrame {
                 
                 lc.actualizarcli(upd);
                 listarCliente();
-                limpiar();
-                
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente" + ex.getMessage());
+                limpiar();     
+            } catch(Exception ex) {
+                JOptionPane.showMessageDialog(this,"Modificado Correctamente" + ex.getMessage());
             }
         }
     }//GEN-LAST:event_jToggleButton4ActionPerformed
@@ -1399,21 +1381,21 @@ public class Ventas extends javax.swing.JFrame {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
       char car = evt.getKeyChar();
-        if (txtNombre.getText().length() >= 50) {
+        if  (txtNombre.getText().length() >= 50) {
             evt.consume();
-        }
-        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ') ) {
+         }
+        if  ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ') ) {
             evt.consume();
         }
         
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        char car = evt.getKeyChar();
-        if (txtApellido.getText().length() >= 50) {
+        char car= evt.getKeyChar();
+        if(txtApellido.getText().length() >= 50) {
             evt.consume();
         }
-        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ') ) {
+        if((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ') ) {
             evt.consume();
         }
     }//GEN-LAST:event_txtApellidoKeyTyped

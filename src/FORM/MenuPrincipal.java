@@ -83,7 +83,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btn3rayitas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N

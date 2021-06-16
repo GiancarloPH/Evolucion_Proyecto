@@ -13,11 +13,11 @@ public class CargoFactory {
     
     ICargo cargo;
 
-    public CargoFactory(ICargo cargo) {
-        this.cargo = cargo;
+    public CargoFactory (ICargo cargo) {
+        this.cargo= cargo;
     }
     
-    public void consultarCargoNuevo(){
+    public void consultarCargoNuevo (){
         cargo.consultarcargo();
     }
     

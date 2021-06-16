@@ -14,11 +14,11 @@ import DATOS.EMPLEADOS;
 public class EmpleadoFactory {
     IE empleado;
 
-    public EmpleadoFactory(IE empleado) {
-        this.empleado = empleado;
+    public EmpleadoFactory (IE empleado) {
+        this.empleado =empleado;
     }
     
-    public void insertarEmpleadoNuevo(EMPLEADOS temp){
+    public void insertarEmpleadoNuevo (EMPLEADOS temp){
         empleado.insertarempleado(temp);
     }
     public void actualizarEmpleadoNuevo(EMPLEADOS temp){

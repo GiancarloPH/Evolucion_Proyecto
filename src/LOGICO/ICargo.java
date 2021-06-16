@@ -10,7 +10,5 @@ package LOGICO;
  * @author Crist
  */
 public interface ICargo {
-    
-    public void consultarcargo();
-    
+    public void consultarcargo(); 
 }

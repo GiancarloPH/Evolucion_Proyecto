@@ -12,53 +12,48 @@ import javax.swing.JOptionPane;
 
 public class LCATEGORIA implements ICategoria{
     private CallableStatement cc;
-     public static ArrayList LCT=new ArrayList(); 
-     conexion con=new conexion();
+     public static ArrayList LCT =new ArrayList(); 
+     conexion con = new conexion();
      
     @Override   
+    //insertar categoria
     public void insertarcate(CATEGORIA temp){
         try{
-         cc=con.getCon().prepareCall("{call ins_categoria(?)}");
+         cc=con.getCon().prepareCall("{call ins_categoria(?)}" );
             
             cc.setString(1,temp.getNombre());
-            int respuesta = cc.executeUpdate();
-            if (respuesta == 1) {
-                    JOptionPane.showMessageDialog(null, "Producto Registrado correctamente!!", "Registro", JOptionPane.INFORMATION_MESSAGE);
-                }
-              
+            int respuesta= cc.executeUpdate();
+            if(respuesta == 1) {
+                    JOptionPane.showMessageDialog(null, "Categoria Registrada correctamente!!", "Registro", JOptionPane.INFORMATION_MESSAGE);
+                }  
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"ERROR INGRESO CATEGORIA"+ e.getMessage());
+            JOptionPane.showMessageDialog(null,"ERROR INGRESO CATEGORIA" + e.getMessage());
         }
     } 
-    
     @Override
+    //eliminar una categoria
     public void eliminarCATEGORIA(CATEGORIA temp){
         try {
-            cc=con.getCon().prepareCall("{call DEL_CateProductos(?)}");
+            cc=con.getCon().prepareCall("{call DEL_CateProductos(?)}" );
             cc.setString(1, temp.getNombre());
-            int respuesta = cc.executeUpdate();
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null, "CATEGORIA Eliminado");
+            int respuesta  = cc.executeUpdate();
+                if (respuesta == 1){
+                    JOptionPane.showMessageDialog(null, "CATEGORIA Eliminada");
                 }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"ERROR ELIMINAR CATEGORIA"+ e.getMessage());
-        }
-    }
-    
+        } catch(Exception e){
+           JOptionPane.showMessageDialog (null, "ERROR ELIMINAR CATEGORIA"+ e.getMessage());
+        }   }
     @Override
+    //consulta de categoria
     public void consultarcategoria(){
         try {
-            con.consulta("select * from categorias where estado<>0");
+            con.consulta( "select * from categorias where estado<>0");
             LCT.clear();
-            while (con.getRs().next()) {                                
-                CATEGORIA C=new CATEGORIA(
-                con.getRs().getInt(1), 
-                con.getRs().getString(2),
-                con.getRs().getString(3));
+            while(con.getRs().next()){                                
+                CATEGORIA C= new CATEGORIA(con.getRs().getInt(1),con.getRs().getString(2),con.getRs().getString(3));
                 LCT.add(C);   
-                //System.out.println("CATEGORIAS: "+C.getCodigo()+" "+C.getNombre()+" "+C.getEstado());
-            }
-        } catch (Exception e) {
+           }
+        } catch(Exception e) {
         }
     }
     

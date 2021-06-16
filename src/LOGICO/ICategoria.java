@@ -12,8 +12,8 @@ import DATOS.CATEGORIA;
  * @author Crist
  */
 public interface ICategoria {
+    
     public void insertarcate(CATEGORIA temp);
     public void eliminarCATEGORIA(CATEGORIA temp);
     public void consultarcategoria();
-    
 }
