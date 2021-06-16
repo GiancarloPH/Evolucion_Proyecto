@@ -50,7 +50,7 @@ public class Ventas extends javax.swing.JFrame {
         calculatTotal();
         noeditarcalendario();
     }
-
+//listar  clientes
     void listarCliente() {
         txtCodigoEmpleado.setVisible(false);
         txtCodigoProducto.setVisible(false);
@@ -59,21 +59,17 @@ public class Ventas extends javax.swing.JFrame {
         txtCodCliente.setVisible(false);
         DefaultTableModel tabla = new DefaultTableModel();
         try {
-
             tabla.addColumn("Codigo");
             tabla.addColumn("Nombre");
             tabla.addColumn("Apellido");
             tabla.addColumn("Nacimiento");
             tabla.addColumn("DNI");
-            
         lc.consultar();
         /*
         INTERFAZ EL DIA 5/5/2021 
         AUTORES: EQUIPO DE EVOLUCION
         */
-        
-        //vfactory.consultaVentaNuevo();
-        
+
             Object dato[] = new Object[7];
            for (int i = 0; i < LCLIENTES.LCLI.size(); i++) {
                 c =(CLIENTES)LCLIENTES.LCLI.get(i);
@@ -90,7 +86,7 @@ public class Ventas extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
-
+//filtrado de la informacion de los clientes
     void BuscarCliente() {
         DefaultTableModel tabla = new DefaultTableModel();
         try {
@@ -282,7 +278,7 @@ public class Ventas extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 204, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 51));
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
@@ -676,13 +672,11 @@ public class Ventas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator14, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(PanleAgregarClienteLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jToggleButton3))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanleAgregarClienteLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jToggleButton4)))
+                            .addGroup(PanleAgregarClienteLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jToggleButton3)
+                                    .addComponent(jToggleButton4, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(PanleAgregarClienteLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(PanleAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

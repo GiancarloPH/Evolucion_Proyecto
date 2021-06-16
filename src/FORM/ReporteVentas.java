@@ -16,19 +16,32 @@ import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ReporteVentas extends javax.swing.JFrame {
-    conexion cone = new  conexion();
-    
+
+    conexion cone = new conexion();
+
     SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
-    VENTAS v=new VENTAS();
-    DETALLEVENTA dv=new DETALLEVENTA();
-    LVENTAS  lv=new LVENTAS();
+    VENTAS v = new VENTAS();
+    DETALLEVENTA dv = new DETALLEVENTA();
+    LVENTAS lv = new LVENTAS();
+
     public ReporteVentas() {
         this.setUndecorated(true);
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../Iconos/cashier_icon-icons.com_53629.png")).getImage());
-       
+
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
         AWTUtilities.setWindowShape(this, forma);
@@ -50,7 +63,7 @@ public class ReporteVentas extends javax.swing.JFrame {
             tabla.addColumn("Fecha De Venta");
             tabla.addColumn("Cliente");
             tabla.addColumn("Importe Total");
-             cone.consulta("select * from RV");
+            cone.consulta("select * from RV");
             Object dato[] = new Object[5];
             while (cone.getRs().next()) {
                 for (int i = 0; i < 5; i++) {
@@ -72,8 +85,7 @@ public class ReporteVentas extends javax.swing.JFrame {
             tabla.addColumn("Fecha De Venta");
             tabla.addColumn("Cliente");
             tabla.addColumn("Importe Total");
-           
-          
+
             this.tblReporteVenta.setModel(tabla);
             //editTabla();
         } catch (Exception e) {
@@ -90,7 +102,7 @@ public class ReporteVentas extends javax.swing.JFrame {
             tabla.addColumn("Precio");
             tabla.addColumn("Cantidad");
             tabla.addColumn("Importe");
-             cone.consulta("select * from RDV where idventa='"+txtCodigoVenta.getText()+"'");
+            cone.consulta("select * from RDV where idventa='" + txtCodigoVenta.getText() + "'");
             Object dato[] = new Object[5];
             while (cone.getRs().next()) {
                 for (int i = 0; i < 5; i++) {
@@ -113,14 +125,14 @@ public class ReporteVentas extends javax.swing.JFrame {
             tabla.addColumn("Fecha De Venta");
             tabla.addColumn("Cliente");
             tabla.addColumn("Importe Total");
-             cone.consulta("select v.idventa,e.nombre ||' '|| e.apellido NB_EMPLE"
-             + ",TO_CHAR(v.fecha,'dd-MM-yyyy') fecha,c.nombre ||' '|| c.apellido NB_CLIENTE"
-             + ",v.importtotal\n" +
-                "from ventas v\n" +
-                "inner join empleados e on e.idempleado= v.idempleado\n" +
-                "inner join clientes c on c.idcliente = v.idcliente\n" +
-                "where fecha between '"+dformat.format(dtcInicio.getDate())+"' and '"+dformat.format(dtcFinal.getDate())+"'");
-                     
+            cone.consulta("select v.idventa,e.nombre ||' '|| e.apellido NB_EMPLE"
+                    + ",TO_CHAR(v.fecha,'dd-MM-yyyy') fecha,c.nombre ||' '|| c.apellido NB_CLIENTE"
+                    + ",v.importtotal\n"
+                    + "from ventas v\n"
+                    + "inner join empleados e on e.idempleado= v.idempleado\n"
+                    + "inner join clientes c on c.idcliente = v.idcliente\n"
+                    + "where fecha between '" + dformat.format(dtcInicio.getDate()) + "' and '" + dformat.format(dtcFinal.getDate()) + "'");
+
             Object dato[] = new Object[5];
             while (cone.getRs().next()) {
                 for (int i = 0; i < 5; i++) {
@@ -128,7 +140,7 @@ public class ReporteVentas extends javax.swing.JFrame {
                 }
                 tabla.addRow(dato);
             }
-          
+
             this.tblReporteVenta.setModel(tabla);
             //editTabla();
         } catch (Exception e) {
@@ -154,6 +166,7 @@ public class ReporteVentas extends javax.swing.JFrame {
         btnMotrarDetalleDeCompra = new javax.swing.JToggleButton();
         txtCodigoVenta = new javax.swing.JLabel();
         btnRegresarAReportes = new javax.swing.JToggleButton();
+        btnexportarpdf = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtImporteTotal = new javax.swing.JTextField();
@@ -313,6 +326,14 @@ public class ReporteVentas extends javax.swing.JFrame {
         });
         jPanel3.add(btnRegresarAReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 40, 49));
 
+        btnexportarpdf.setText("Exportar a PDF");
+        btnexportarpdf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnexportarpdfActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnexportarpdf, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 140, -1));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 160, 540));
 
         jPanel2.setBackground(new java.awt.Color(6, 3, 9));
@@ -443,6 +464,47 @@ public class ReporteVentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMotrarDetalleDeCompraActionPerformed
 
+    private void btnexportarpdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexportarpdfActionPerformed
+        // TODO add your handling code here:
+        Document documento = new Document();
+        try {
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Ventas.pdf"));
+            documento.open();
+
+            PdfPTable tablas = new PdfPTable(5);
+            tablas.addCell("Codigo Venta");
+            tablas.addCell("Empleado");
+            tablas.addCell("Fecha De Venta");
+            tablas.addCell("Cliente");
+            tablas.addCell("Importe Total");
+            
+
+            try {
+                cone.consulta("select * from RC");
+                Object dato[] = new Object[5];
+
+                if (cone.getRs().next()) {
+
+                    do {
+                        tablas.addCell(cone.getRs().getString(1));
+                        tablas.addCell(cone.getRs().getString(2));
+                        tablas.addCell(cone.getRs().getString(3));
+                        tablas.addCell(cone.getRs().getString(4));
+                        tablas.addCell(cone.getRs().getString(5));
+                    } while (cone.getRs().next());
+                    documento.add(tablas);
+                }
+                
+            } catch (DocumentException | SQLException e) {
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte Creado");
+
+        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+        }
+    }//GEN-LAST:event_btnexportarpdfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -483,6 +545,7 @@ public class ReporteVentas extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnBuscarFechas;
     private javax.swing.JToggleButton btnMotrarDetalleDeCompra;
     private javax.swing.JToggleButton btnRegresarAReportes;
+    private javax.swing.JButton btnexportarpdf;
     private com.toedter.calendar.JDateChooser dtcFinal;
     private com.toedter.calendar.JDateChooser dtcInicio;
     private javax.swing.JLabel jLabel2;
