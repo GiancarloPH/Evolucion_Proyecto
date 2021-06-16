@@ -4,7 +4,7 @@ import DATOS.DETALLEVENTA;
 import DATOS.VENTAS;
 import LOGICO.LVENTAS;
 import LOGICO.conexion;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
@@ -31,7 +31,7 @@ public class ReporteVentasActual extends javax.swing.JFrame {
        
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+    //    AWTUtilities.setWindowShape(this, forma);
         btnMotrarDetalleDeCompra.setVisible(false);
         jScrollPane2.setVisible(false);
         btnRegresarAReportes.setVisible(false);
@@ -510,14 +510,14 @@ public class ReporteVentasActual extends javax.swing.JFrame {
             if (jScrollPane1.isVisible() == true) {
                 double tpagar = 0;
                 for (int i = 0; i < tblReporteVenta.getRowCount(); i++) {
-                    double te = Double.parseDouble(String.valueOf(tblReporteVenta.getValueAt(i, 4)));
+                    double te = Double.parseDouble(String.valueOf(tblReporteVenta.getValueAt(i, 6)));
                     tpagar = tpagar + te;
                 }
                 txtImporteTotal.setText("" + tpagar + "0");
             } else if (jScrollPane2.isVisible() == true) {
                 double tpagar = 0;
                 for (int i = 0; i < tbDetalleReporteVenta.getRowCount(); i++) {
-                    double te = Double.parseDouble(String.valueOf(tbDetalleReporteVenta.getValueAt(i, 4)));
+                    double te = Double.parseDouble(String.valueOf(tbDetalleReporteVenta.getValueAt(i, 5)));
                     tpagar = tpagar + te;
                 }
                 txtImporteTotal.setText("" + tpagar + "0");

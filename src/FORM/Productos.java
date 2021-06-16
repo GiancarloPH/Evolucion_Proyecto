@@ -5,7 +5,7 @@ import DATOS.PRODUCTOS;
 import LOGICO.LCATEGORIA;
 import LOGICO.LPRODUCTOS;
 import LOGICO.conexion;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import LOGICO.CategoriaFactory;
 import LOGICO.ProductoFactory;
 import java.awt.Shape;
@@ -76,7 +76,7 @@ public class Productos extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("../Iconos/cashier_icon-icons.com_53629.png")).getImage());
        this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+    //    AWTUtilities.setWindowShape(this, forma);
         listarProducto();
         listarTipo();
         Select2();

@@ -5,7 +5,7 @@ import DATOS.EMPLEADOS;
 import DATOS.LOGIN;
 import LOGICO.LEMPLEADO;
 import LOGICO.LLOGIN;
-import com.sun.awt.AWTUtilities;
+ //import com.sun.awt.AWTUtilities;
 import LOGICO.LoginFactory;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
@@ -20,7 +20,7 @@ public class InicioSesion extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("../Iconos/cashier_icon-icons.com_53629.png")).getImage());
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+      //  AWTUtilities.setWindowShape(this, forma);
     }
 
     @SuppressWarnings("unchecked")

@@ -7,7 +7,7 @@ import LOGICO.IE;
 import LOGICO.LCARGO;
 import LOGICO.LEMPLEADO;
 import LOGICO.conexion;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import com.toedter.calendar.JTextFieldDateEditor;
 import LOGICO.EmpleadoFactory;
 import static java.awt.Frame.NORMAL;
@@ -42,7 +42,7 @@ public final class Empleados extends javax.swing.JFrame {
         this.setExtendedState(NORMAL);
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+//        AWTUtilities.setWindowShape(this, forma);
         listarEmpleado();
         listarTipo();
         noeditarcalendario();

@@ -24,8 +24,8 @@ public class conexion {
     private PreparedStatement pts;
     private CallableStatement cs;
     private String url="jdbc:oracle:thin:@localhost:1521:XE";
-    private String usu="GIAN";
-    private String cont="1234";
+    private String usu="URIBE";
+    private String cont="URIBE";
     
      public conexion() {  
        try {

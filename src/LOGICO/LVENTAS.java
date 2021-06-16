@@ -20,10 +20,14 @@ public class LVENTAS implements IVentas{
     @Override
     public void insertarventa(VENTAS temp){
         try{
-            cc=con.getCon().prepareCall("{call ins_venta(?,?,?)}");
+            cc=con.getCon().prepareCall("{call ins_venta(?,?,?,?,?)}");
             cc.setString(1,temp.getIdEmpleado());
             cc.setFloat(2,temp.getImportTotal());
             cc.setString(3,temp.getIdCliente());
+            
+            
+            cc.setString(4,temp.getSerie());
+            cc.setString(5,temp.getNumeracion());
             int respuesta = cc.executeUpdate();
             if (respuesta == 1) {
                  //   JOptionPane.showMessageDialog(null, "compra RegistradA correctamente!!");

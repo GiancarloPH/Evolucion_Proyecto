@@ -2,7 +2,7 @@ package FORM;
 
 import DATOS.EMPLEADOS;
 import LOGICO.LEMPLEADO;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setExtendedState(NORMAL);
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+    //    AWTUtilities.setWindowShape(this, forma);
         btnRventas.setVisible(false);
         btnRcompras.setVisible(false);
     }

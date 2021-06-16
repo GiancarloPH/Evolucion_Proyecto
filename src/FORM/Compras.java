@@ -6,7 +6,7 @@ import DATOS.PROVEEDORES;
 import LOGICO.LCOMPRAS;
 import LOGICO.LPROVEEDORES;
 import LOGICO.conexion;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import LOGICO.CargoFactory;
 import LOGICO.LCARGO;
 import java.awt.Shape;
@@ -42,7 +42,7 @@ public final class Compras extends javax.swing.JFrame {
           panelprovselec.setVisible(false); 
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+   //     AWTUtilities.setWindowShape(this, forma);
         listarProveedores();
         listarProducto();
       

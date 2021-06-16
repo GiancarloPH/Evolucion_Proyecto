@@ -1,6 +1,5 @@
 package FORM;
 
-
 import DATOS.CLIENTES;
 import DATOS.DETALLEVENTA;
 import DATOS.LOGIN;
@@ -8,7 +7,7 @@ import DATOS.VENTAS;
 import LOGICO.LCLIENTES;
 import LOGICO.LVENTAS;
 import LOGICO.conexion;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import com.toedter.calendar.JTextFieldDateEditor;
 import LOGICO.VentasFactory;
 import java.awt.Shape;
@@ -25,25 +24,25 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
 
 public class Ventas extends javax.swing.JFrame {
-    
+
     DefaultTableModel model = new DefaultTableModel();
-    conexion cone=new conexion();
-    CLIENTES c= new CLIENTES();
-    LCLIENTES lc=new LCLIENTES();
-    VENTAS vnt= new VENTAS();
-    LVENTAS lv=new LVENTAS();
-    
+    conexion cone = new conexion();
+    CLIENTES c = new CLIENTES();
+    LCLIENTES lc = new LCLIENTES();
+    VENTAS vnt = new VENTAS();
+    LVENTAS lv = new LVENTAS();
+
     VentasFactory vfactory = new VentasFactory(new LVENTAS());
-    
+
     public Ventas() {
         this.setUndecorated(true);
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../Iconos/cashier_icon-icons.com_53629.png")).getImage());
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+        //    AWTUtilities.setWindowShape(this, forma);
         PanleAgregarCliente.setVisible(false);
-            PANELSELECC.setVisible(false);
+        PANELSELECC.setVisible(false);
         listarProducto();
         listarCliente();
         llenartabla();
@@ -65,25 +64,24 @@ public class Ventas extends javax.swing.JFrame {
             tabla.addColumn("Apellido");
             tabla.addColumn("Nacimiento");
             tabla.addColumn("DNI");
-            
-        lc.consultar();
-        /*
+
+            lc.consultar();
+            /*
         INTERFAZ EL DIA 5/5/2021 
         AUTORES: EQUIPO DE EVOLUCION
-        */
-        
-        //vfactory.consultaVentaNuevo();
-        
+             */
+
+            //vfactory.consultaVentaNuevo();
             Object dato[] = new Object[7];
-           for (int i = 0; i < LCLIENTES.LCLI.size(); i++) {
-                c =(CLIENTES)LCLIENTES.LCLI.get(i);
-                 dato[0] = c.getIDCLIENTE();
-                 dato[1] = c.getNOMBRE();
-                 dato[2] = c.getAPELLIDO();
-                 dato[3] = c.getNACIMIENTO();
-                 dato[4] = c.getDNI();
-                   tabla.addRow(dato);
-             }
+            for (int i = 0; i < LCLIENTES.LCLI.size(); i++) {
+                c = (CLIENTES) LCLIENTES.LCLI.get(i);
+                dato[0] = c.getIDCLIENTE();
+                dato[1] = c.getNOMBRE();
+                dato[2] = c.getAPELLIDO();
+                dato[3] = c.getNACIMIENTO();
+                dato[4] = c.getDNI();
+                tabla.addRow(dato);
+            }
             this.tblCliente.setModel(tabla);
             // editTabla();
         } catch (Exception e) {
@@ -100,19 +98,19 @@ public class Ventas extends javax.swing.JFrame {
             tabla.addColumn("Apellido");
             tabla.addColumn("Nacimiento");
             tabla.addColumn("DNI");
-            String letra=txtBuscarClientes.getText();
-            cone.consulta("  Select * from listarcliente\n" +
-            "    WHERE ESTADO=1 \n" +
-            "    AND (REGEXP_LIKE( LOWER(nm),LOWER('"+letra+"+'))\n" +
-            "    OR REGEXP_LIKE( LOWER(ap),LOWER('"+letra+"+'))\n" +
-            "    OR REGEXP_LIKE( LOWER(dn),LOWER('"+letra+"+')))");
-             Object dato[] = new Object[5];
-             while(cone.getRs().next()){
+            String letra = txtBuscarClientes.getText();
+            cone.consulta("  Select * from listarcliente\n"
+                    + "    WHERE ESTADO=1 \n"
+                    + "    AND (REGEXP_LIKE( LOWER(nm),LOWER('" + letra + "+'))\n"
+                    + "    OR REGEXP_LIKE( LOWER(ap),LOWER('" + letra + "+'))\n"
+                    + "    OR REGEXP_LIKE( LOWER(dn),LOWER('" + letra + "+')))");
+            Object dato[] = new Object[5];
+            while (cone.getRs().next()) {
                 for (int i = 0; i < 5; i++) {
                     dato[i] = cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
-             } 
+            }
             this.tblCliente.setModel(tabla);
             // editTabla();
         } catch (Exception e) {
@@ -130,7 +128,7 @@ public class Ventas extends javax.swing.JFrame {
             tabla.addColumn("Precio Unitario");
             tabla.addColumn("Stock");
             tabla.addColumn("Categoria");
-           cone.consulta("Select * from listarProductos");
+            cone.consulta("Select * from listarProductos");
             Object dato[] = new Object[6];
             while (cone.getRs().next()) {
                 for (int i = 0; i < 6; i++) {
@@ -154,20 +152,20 @@ public class Ventas extends javax.swing.JFrame {
             tabla.addColumn("Precio Unitario");
             tabla.addColumn("Stock");
             tabla.addColumn("Categoria");
-            String letra=txtBuscarProductos.getText();
-            cone.consulta("  Select * from listarProductos\n" +
-            "    WHERE ESTADO=1 \n" +
-            "    AND (REGEXP_LIKE( LOWER(NOMBRE),LOWER('"+letra+"+'))\n" +
-            "    OR REGEXP_LIKE( LOWER(Descripcion),LOWER('"+letra+"+'))\n" +
-            "    OR REGEXP_LIKE( LOWER(preciounit),LOWER('"+letra+"+'))\n" +
-            "    OR REGEXP_LIKE( LOWER(CATGEORIA),LOWER('"+letra+"+')))");
-             Object dato[] = new Object[6];
-             while(cone.getRs().next()){
+            String letra = txtBuscarProductos.getText();
+            cone.consulta("  Select * from listarProductos\n"
+                    + "    WHERE ESTADO=1 \n"
+                    + "    AND (REGEXP_LIKE( LOWER(NOMBRE),LOWER('" + letra + "+'))\n"
+                    + "    OR REGEXP_LIKE( LOWER(Descripcion),LOWER('" + letra + "+'))\n"
+                    + "    OR REGEXP_LIKE( LOWER(preciounit),LOWER('" + letra + "+'))\n"
+                    + "    OR REGEXP_LIKE( LOWER(CATGEORIA),LOWER('" + letra + "+')))");
+            Object dato[] = new Object[6];
+            while (cone.getRs().next()) {
                 for (int i = 0; i < 6; i++) {
                     dato[i] = cone.getRs().getString(i + 1);
                 }
                 tabla.addRow(dato);
-             } 
+            }
             this.tblProductos.setModel(tabla);
             // editTabla();
         } catch (Exception e) {
@@ -1089,25 +1087,25 @@ public class Ventas extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         nuevo();
-         paneles();
+        paneles();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAñadirMouseClicked
         try {
-            int cant= Integer.parseInt(txtCantidad.getText());
+            int cant = Integer.parseInt(txtCantidad.getText());
             int stock = Integer.parseInt(txtStock.getText());
-            
-            if (stock == 0  || cant>= stock) {
+
+            if (stock == 0 || cant >= stock) {
                 JOptionPane.showMessageDialog(this, "Producto agotado o supera cantidad de stock");
-                 paneles();
+                paneles();
             } else {
                 if (txtCodCliente.getText().equals("") || txtCodigoProducto.getText().equals("")) {
                     JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Cliente o Un Producto...");
-                     paneles();
+                    paneles();
                 } else if (txtCantidad.getText().equals("")) {
                     JOptionPane.showMessageDialog(this, "No Ha Ingresando Una Cantidad A vender...");
-                     paneles();
-                    
+                    paneles();
+
                 } else {
 
                     model = (DefaultTableModel) tblVenta.getModel();
@@ -1141,7 +1139,7 @@ public class Ventas extends javax.swing.JFrame {
                 }
             }
         } catch (Exception ex) {
-           // JOptionPane.showMessageDialog(this, "error" + ex.getMessage());
+            // JOptionPane.showMessageDialog(this, "error" + ex.getMessage());
         }
     }//GEN-LAST:event_btnAñadirMouseClicked
 
@@ -1152,11 +1150,11 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProductoKeyTyped
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
-         char car = evt.getKeyChar();
+        char car = evt.getKeyChar();
         if (txtCantidad.getText().length() >= 5) {
             evt.consume();
         }
-          if ((car < '0' || car > '9')){
+        if ((car < '0' || car > '9')) {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
@@ -1168,49 +1166,83 @@ public class Ventas extends javax.swing.JFrame {
             if (tblVenta.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "No Ha Añadido Un Producto A La lista...");
             } else {
-                String cod="";
+                String cod = "";
                 try {
-                    VENTAS comp= new VENTAS();
+                    VENTAS comp = new VENTAS();
                     comp.setIdEmpleado(txtCodigoEmpleado.getText());
                     comp.setImportTotal(Float.parseFloat(txtImporteTotal.getText()));
-                   
                     comp.setIdCliente(txtCodCliente.getText());
-                   
-                   // lv.insertarventa(comp);
-                   /*
+
+                    cone.consulta("Select * FROM MAXSERIE");
+                    String serie = "null";
+                    while (cone.getRs().next()) {
+                        serie = cone.getRs().getString(1);
+                    }
+
+                    if (serie!=null) {
+                        int numero = Integer.parseInt(serie);
+                        System.out.println(numero);
+                        comp.setSerie(String.format("%03d", numero));
+                    } else {
+                        comp.setSerie("001");
+                    }
+
+                    cone.consulta("Select * from MAXNUMERACION");
+                    String numeracion = "null";
+                    while (cone.getRs().next()) {
+                        numeracion = cone.getRs().getString(1);
+                    }
+                    if (numeracion!=null) {
+                        int numero = (Integer.parseInt(numeracion) + 1);
+                        System.out.println(numero);
+                        if (numero > 9999999) {
+                            int numero2 = (Integer.parseInt(serie) + 1);
+                            comp.setSerie(String.format("%03d", numero2));
+                            comp.setNumeracion("0000001");
+                        } else {
+                         //   System.out.println(numero);
+                            comp.setNumeracion(String.format("%07d", numero));
+                        }
+
+                    } else {
+                        comp.setNumeracion("0000001");
+                    }
+
+                    // lv.insertarventa(comp);
+                    /*
                    INTERFAZ EL DIA 5/5/2021 
                    AUTORES: EQUIPO DE EVOLUCION
-                   */
-                   vfactory.insertarVentaNuevo(comp);
-                   
-               } catch (Exception ex) {
+                     */
+                    vfactory.insertarVentaNuevo(comp);
+
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Error en generar venta " + ex.getMessage());
-                     paneles();
+                    paneles();
                 }
-                for(int i = 0; i < tblVenta.getRowCount(); i++) {
-                    String idp = tblVenta.getValueAt(i,0).toString();
+                for (int i = 0; i < tblVenta.getRowCount(); i++) {
+                    String idp = tblVenta.getValueAt(i, 0).toString();
                     int cant = Integer.parseInt(tblVenta.getValueAt(i, 4).toString());
                     Float pre = Float.parseFloat(tblVenta.getValueAt(i, 5).toString());
-                    try { 
-                         cone.consulta("select idventa from VENTAS \n" +
-                         "where idventa in(select max(idventa) from VENTAS)");
-                          while (cone.getRs().next()) {
-                          cod= cone.getRs().getString(1);
-                         }
+                    try {
+                        cone.consulta("select idventa from VENTAS \n"
+                                + "where idventa in(select max(idventa) from VENTAS)");
+                        while (cone.getRs().next()) {
+                            cod = cone.getRs().getString(1);
+                        }
                         DETALLEVENTA dcomp = new DETALLEVENTA();
                         dcomp.setIdVenta(cod);
                         dcomp.setIdProducto(idp);
                         dcomp.setCantidad(cant);
                         dcomp.setPrecio(pre);
-                     //   lv.insertardetVENTA(dcomp);
-                     /*
+                        //   lv.insertardetVENTA(dcomp);
+                        /*
                      INTERFAZ EL DIA 5/5/2021 
                      AUTORES: EQUIPO DE EVOLUCION
-                     */
-                     vfactory.insertardetVentaNuevo(dcomp);
-               } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null, "Error en generar detventa " + ex.getMessage());
-                         paneles();
+                         */
+                        vfactory.insertardetVentaNuevo(dcomp);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Error en generar det venta :" + ex.getMessage());
+                        paneles();
                     }
                 }
                 calculatTotal();
@@ -1246,7 +1278,7 @@ public class Ventas extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtBuscarClientesKeyTyped
-   LOGIN log=new LOGIN();
+    LOGIN log = new LOGIN();
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
         txtCodigoEmpleado.setText(String.valueOf(log.getCodigo()));
@@ -1270,15 +1302,15 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-       
+
         int row = tblProductos.rowAtPoint(evt.getPoint());
 
         txtCodigoProducto.setText(tblProductos.getValueAt(row, 0).toString());
         txtProducto.setText(tblProductos.getValueAt(row, 1).toString());
         txtPrecio.setText(tblProductos.getValueAt(row, 3).toString());
         txtStock.setText(tblProductos.getValueAt(row, 4).toString());
-        
-        
+
+
     }//GEN-LAST:event_tblProductosMouseClicked
 
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
@@ -1287,19 +1319,19 @@ public class Ventas extends javax.swing.JFrame {
         txtCliente.setText(tblCliente.getValueAt(row, 1).toString());
         txtNombre1.setText(tblCliente.getValueAt(row, 1).toString());
         txtApellido1.setText(tblCliente.getValueAt(row, 2).toString());
-        txtNombre.setText(tblCliente.getValueAt(row, 1).toString()); 
+        txtNombre.setText(tblCliente.getValueAt(row, 1).toString());
         txtApellido.setText(tblCliente.getValueAt(row, 2).toString());
         txtDNI.setText(tblCliente.getValueAt(row, 4).toString());
 //        Date date = new SimpleDateFormat("dd-MM-yyyy").parse(tblCliente.getValueAt(row, 3).toString());
 
-       // txtFechaNac.setDate(date);
-    //    
+        // txtFechaNac.setDate(date);
+        //    
     }//GEN-LAST:event_tblClienteMouseClicked
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        PANELSELECC.setVisible(true);   
+        PANELSELECC.setVisible(true);
         PanleAgregarCliente.setVisible(false);
-            panelcli.setVisible(false);
+        panelcli.setVisible(false);
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void Regresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Regresar1ActionPerformed
@@ -1313,15 +1345,15 @@ public class Ventas extends javax.swing.JFrame {
 
     private void jToggleButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jToggleButton3MouseClicked
         try {
-            String fechnc=((JTextField) txtFechaNac.getDateEditor().getUiComponent()).getText();
-          CLIENTES ins=new CLIENTES();
-          ins.setNOMBRE(txtNombre.getText());
-          ins.setAPELLIDO(txtApellido.getText());
-          ins.setNACIMIENTO(fechnc);
-          ins.setDNI(txtDNI.getText());
-          lc.insertarcli(ins);
-          listarCliente();
-          limpiar();
+            String fechnc = ((JTextField) txtFechaNac.getDateEditor().getUiComponent()).getText();
+            CLIENTES ins = new CLIENTES();
+            ins.setNOMBRE(txtNombre.getText());
+            ins.setAPELLIDO(txtApellido.getText());
+            ins.setNACIMIENTO(fechnc);
+            ins.setDNI(txtDNI.getText());
+            lc.insertarcli(ins);
+            listarCliente();
+            limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Ingreso Doble", JOptionPane.ERROR_MESSAGE);
 
@@ -1333,29 +1365,29 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGeneraCompraActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        
+
         int row = tblCliente.getSelectedRow();
 
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Registro");
-        }else {
-              int i= JOptionPane.showConfirmDialog(null, "Seguro de Eliminar Cliente?");
-            if(i==0){
+        } else {
+            int i = JOptionPane.showConfirmDialog(null, "Seguro de Eliminar Cliente?");
+            if (i == 0) {
                 try {
-                 CLIENTES delc=new CLIENTES();
-                 delc.setIDCLIENTE(txtCodCliente.getText());
-                 lc.eliminarcliente(delc);
-                 listarCliente();
-                 limpiar();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Eliminacion", JOptionPane.ERROR_MESSAGE);
+                    CLIENTES delc = new CLIENTES();
+                    delc.setIDCLIENTE(txtCodCliente.getText());
+                    lc.eliminarcliente(delc);
+                    listarCliente();
+                    limpiar();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Eliminacion", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No se elimino");
+                listarCliente();
+                limpiarTabla();
             }
-            
-            }else {
-                  JOptionPane.showMessageDialog(this, "No se elimino");
-                   listarCliente();
-                   limpiarTabla();
-        }
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
@@ -1364,23 +1396,23 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevo1ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-      int row = tblCliente.getSelectedRow();
+        int row = tblCliente.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "No Ha Selecionado Un Registro");
         } else {
             try {
-               String fechnc=((JTextField) txtFechaNac.getDateEditor().getUiComponent()).getText();
-                 CLIENTES upd = new CLIENTES();
-                 upd.setIDCLIENTE(txtCodCliente.getText());
-                 upd.setNOMBRE(txtNombre.getText());
-                 upd.setAPELLIDO(txtApellido.getText());
-                 upd.setNACIMIENTO(fechnc);
-                 upd.setDNI(txtDNI.getText());
-                
+                String fechnc = ((JTextField) txtFechaNac.getDateEditor().getUiComponent()).getText();
+                CLIENTES upd = new CLIENTES();
+                upd.setIDCLIENTE(txtCodCliente.getText());
+                upd.setNOMBRE(txtNombre.getText());
+                upd.setAPELLIDO(txtApellido.getText());
+                upd.setNACIMIENTO(fechnc);
+                upd.setDNI(txtDNI.getText());
+
                 lc.actualizarcli(upd);
                 listarCliente();
                 limpiar();
-                
+
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Producto Modificado Correctamente" + ex.getMessage());
             }
@@ -1388,7 +1420,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void txtDNIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDNIKeyTyped
-     char car = evt.getKeyChar();
+        char car = evt.getKeyChar();
         if (txtDNI.getText().length() >= 8) {
             evt.consume();
         }
@@ -1398,14 +1430,14 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDNIKeyTyped
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-      char car = evt.getKeyChar();
+        char car = evt.getKeyChar();
         if (txtNombre.getText().length() >= 50) {
             evt.consume();
         }
-        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ') ) {
+        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ')) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
@@ -1413,7 +1445,7 @@ public class Ventas extends javax.swing.JFrame {
         if (txtApellido.getText().length() >= 50) {
             evt.consume();
         }
-        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ') ) {
+        if ((car < 'a' || car > 'z') && (car < 'A' || car > 'Z') && (car < ' ' || car > ' ')) {
             evt.consume();
         }
     }//GEN-LAST:event_txtApellidoKeyTyped
@@ -1557,15 +1589,16 @@ public class Ventas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El producto  '" + txtProducto.getText() + "'  Ya Esta Añadido A La Lista...");
                 model.removeRow(i);
             }
-            
+
         }
-     
-               
+
     }
-    void paneles(){
+
+    void paneles() {
         panelcli.setVisible(true);
-                PANELSELECC.setVisible(false);
+        PANELSELECC.setVisible(false);
     }
+
     void calculatTotal() {
         try {
             double tpagar = 0;
@@ -1597,6 +1630,7 @@ public class Ventas extends javax.swing.JFrame {
         txtDNI.setText("");
         txtFechaNac.setDate(null);
     }
+
     void nuevo() {
         limpiarTabla();
         calculatTotal();
@@ -1607,7 +1641,7 @@ public class Ventas extends javax.swing.JFrame {
         txtCantidad.requestFocus();
     }
 
-        void noeditarcalendario() {
+    void noeditarcalendario() {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) txtFechaNac.getDateEditor();
         editor.setEditable(false);
     }

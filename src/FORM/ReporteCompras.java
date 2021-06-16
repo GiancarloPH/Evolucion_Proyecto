@@ -1,7 +1,7 @@
 package FORM;
 
 import LOGICO.conexion;
-import com.sun.awt.AWTUtilities;
+//import com.sun.awt.AWTUtilities;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
@@ -26,7 +26,7 @@ public class ReporteCompras extends javax.swing.JFrame {
        
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 15, 15);
-        AWTUtilities.setWindowShape(this, forma);
+   //     AWTUtilities.setWindowShape(this, forma);
         listarRCompra();
         noeditarcalendario();
         btnMotrarDetalleDeCompra1.setVisible(false);
@@ -122,7 +122,7 @@ public class ReporteCompras extends javax.swing.JFrame {
             tabla.addColumn("Cantidad");
             tabla.addColumn("Precio De Compra");
             tabla.addColumn("Importe");
-          cone.consulta("select * from RDC where idcompra='"+txtCodigoCompra.getText()+"'");
+            cone.consulta("select * from RDC where idcompra='"+txtCodigoCompra.getText()+"'");
             Object dato[] = new Object[5];
             while (cone.getRs().next()) {
                 for (int i = 0; i < 5; i++) {
@@ -232,7 +232,7 @@ public class ReporteCompras extends javax.swing.JFrame {
         Regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/back_30px.png"))); // NOI18N
         Regresar.setBorder(null);
         Regresar.setContentAreaFilled(false);
-        Regresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Regresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Regresar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/back_35px.png"))); // NOI18N
         Regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,7 +394,7 @@ public class ReporteCompras extends javax.swing.JFrame {
         btnRegresarAReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/back_30px.png"))); // NOI18N
         btnRegresarAReportes.setBorder(null);
         btnRegresarAReportes.setContentAreaFilled(false);
-        btnRegresarAReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresarAReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresarAReportes.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/back_35px.png"))); // NOI18N
         btnRegresarAReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

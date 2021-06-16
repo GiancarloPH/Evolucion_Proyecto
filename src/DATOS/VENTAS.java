@@ -11,6 +11,8 @@ public class VENTAS {
     private String IdEmpleado; 
     private float ImportTotal; 
     private String idCliente ;
+    private String Serie;
+    private String Numeracion;
 
     public VENTAS() {
          this.idVenta = "";
@@ -27,6 +29,18 @@ public class VENTAS {
         this.ImportTotal = ImportTotal;
         this.idCliente = idCliente;
     }
+
+    public VENTAS(String idVenta, String Fecha, String IdEmpleado, float ImportTotal, String idCliente, String Serie, String Numeracion) {
+        this.idVenta = idVenta;
+        this.Fecha = Fecha;
+        this.IdEmpleado = IdEmpleado;
+        this.ImportTotal = ImportTotal;
+        this.idCliente = idCliente;
+        this.Serie = Serie;
+        this.Numeracion = Numeracion;
+    }
+    
+    
 
     public String getIdCliente() {
         return idCliente;
@@ -67,6 +81,24 @@ public class VENTAS {
     public void setImportTotal(float ImportTotal) {
         this.ImportTotal = ImportTotal;
     }
+
+    public String getSerie() {
+        return Serie;
+    }
+
+    public void setSerie(String Serie) {
+        this.Serie = Serie;
+    }
+
+    public String getNumeracion() {
+        return Numeracion;
+    }
+
+    public void setNumeracion(String Numeracion) {
+        this.Numeracion = Numeracion;
+    }
+    
+    
 
     @Override
     public String toString() {
