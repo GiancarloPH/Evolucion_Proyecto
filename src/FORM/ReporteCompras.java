@@ -14,6 +14,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JTextFieldDateEditor;
+import java.awt.Shape;
+import java.awt.geom.RoundRectangle2D;
+
+import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.SQLException;
+
 public class ReporteCompras extends javax.swing.JFrame {
 
     SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
@@ -164,6 +181,7 @@ public class ReporteCompras extends javax.swing.JFrame {
         txtCodigoCompra = new javax.swing.JLabel();
         btnRegresarAReportes = new javax.swing.JToggleButton();
         btnMotrarDetalleDeCompra1 = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1300, 726));
@@ -422,6 +440,14 @@ public class ReporteCompras extends javax.swing.JFrame {
         });
         jPanel3.add(btnMotrarDetalleDeCompra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 140, 30));
 
+        jButton1.setText("EXPORTAR A PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 140, 30));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 160, 540));
 
         pack();
@@ -479,6 +505,47 @@ public class ReporteCompras extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMotrarDetalleDeCompra1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Document documento = new Document();
+        try {
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Compras.pdf"));
+            documento.open();
+
+
+            PdfPTable tablas = new PdfPTable(5);
+
+            tablas.addCell("Codigo Compra");
+            tablas.addCell("Empleado");
+            tablas.addCell("RUC");
+            tablas.addCell("Fecha De Compra");
+            tablas.addCell("Importe Total");
+
+            try {
+                cone.consulta("select * from RC");
+                Object dato[] = new Object[5];
+
+                if (cone.getRs().next()) {
+
+                    do {
+                        tablas.addCell(cone.getRs().getString(1));
+                        tablas.addCell(cone.getRs().getString(2));
+                        tablas.addCell(cone.getRs().getString(3));
+                        tablas.addCell(cone.getRs().getString(4));
+                        tablas.addCell(cone.getRs().getString(5));
+                    } while (cone.getRs().next());
+                    documento.add(tablas);
+                }
+
+            } catch (DocumentException | SQLException e) {
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte Creado");
+
+        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -513,6 +580,7 @@ public class ReporteCompras extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnRegresarAReportes;
     private com.toedter.calendar.JDateChooser dtcFinal;
     private com.toedter.calendar.JDateChooser dtcInicio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

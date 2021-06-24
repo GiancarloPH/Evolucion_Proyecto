@@ -16,36 +16,17 @@ import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 
-import com.toedter.calendar.JTextFieldDateEditor;
-import java.awt.Shape;
-import java.awt.geom.RoundRectangle2D;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.HeadlessException;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.sql.SQLException;
-
-public class ReporteVentas extends javax.swing.JFrame {
+public class Devolucion extends javax.swing.JFrame {
     conexion cone = new  conexion();
+    
+    
     
     SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-yyyy");
     VENTAS v=new VENTAS();
     DETALLEVENTA dv=new DETALLEVENTA();
     LVENTAS  lv=new LVENTAS();
-    public ReporteVentas() {
+    public Devolucion() {
         this.setUndecorated(true);
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("../Iconos/cashier_icon-icons.com_53629.png")).getImage());
@@ -58,8 +39,8 @@ public class ReporteVentas extends javax.swing.JFrame {
         btnRegresarAReportes.setVisible(false);
         txtCodigoVenta.setVisible(false);
         listarRVenta();
-        calculatTotal();
-        noeditarcalendario();
+      //  calculatTotal();
+      //  noeditarcalendario();
     }
 
     void listarRVenta() {
@@ -73,7 +54,7 @@ public class ReporteVentas extends javax.swing.JFrame {
             tabla.addColumn("NRO COMPROBANTE");
             tabla.addColumn("Importe Total");
             tabla.addColumn("ESTADO");
-             cone.consulta("select * from RV");
+             cone.consulta("select * from RVD");
             Object dato[] = new Object[7];
             while (cone.getRs().next()) {
                 for (int i = 0; i < 7; i++) {
@@ -127,7 +108,7 @@ public class ReporteVentas extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(null, "error     " + e);
         }
     }
-
+/*
     void buscarFechaRVenta() {
         DefaultTableModel tabla = new DefaultTableModel();
         try {
@@ -158,30 +139,22 @@ public class ReporteVentas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "error  fe   " + e);
         }
     }
-
+*/
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panels = new javax.swing.JPanel();
         Regresar = new javax.swing.JToggleButton();
-        dtcInicio = new com.toedter.calendar.JDateChooser();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        dtcFinal = new com.toedter.calendar.JDateChooser();
         btnBuscarFechas = new javax.swing.JToggleButton();
         jLabel4 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        btnMotrarDetalleDeCompra = new javax.swing.JToggleButton();
         txtCodigoVenta = new javax.swing.JLabel();
         btnRegresarAReportes = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        txtImporteTotal = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
+        btnMotrarDetalleDeCompra = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbDetalleReporteVenta = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -216,28 +189,13 @@ public class ReporteVentas extends javax.swing.JFrame {
             }
         });
 
-        dtcInicio.setBackground(new java.awt.Color(6, 3, 9));
-        dtcInicio.setForeground(new java.awt.Color(255, 255, 255));
-        dtcInicio.setDateFormatString("dd-MM-yyyy");
-
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Hasta");
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Desde");
-
-        dtcFinal.setBackground(new java.awt.Color(6, 3, 9));
-        dtcFinal.setForeground(new java.awt.Color(255, 255, 255));
-        dtcFinal.setDateFormatString("dd-MM-yyyy");
-
         btnBuscarFechas.setBackground(new java.awt.Color(6, 3, 9));
         btnBuscarFechas.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnBuscarFechas.setForeground(new java.awt.Color(255, 255, 255));
         btnBuscarFechas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/search_property_30px.png"))); // NOI18N
         btnBuscarFechas.setText("Buscar");
         btnBuscarFechas.setContentAreaFilled(false);
+        btnBuscarFechas.setEnabled(false);
         btnBuscarFechas.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/search_property_35px.png"))); // NOI18N
         btnBuscarFechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +205,7 @@ public class ReporteVentas extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel4.setText("REPORTE DE VENTAS");
+        jLabel4.setText("DEVOLUCION");
 
         javax.swing.GroupLayout panelsLayout = new javax.swing.GroupLayout(panels);
         panels.setLayout(panelsLayout);
@@ -261,15 +219,7 @@ public class ReporteVentas extends javax.swing.JFrame {
                 .addComponent(Regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addGap(466, 466, 466)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(dtcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dtcFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addGap(891, 891, 891)
                 .addComponent(btnBuscarFechas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(710, 710, 710))
         );
@@ -283,43 +233,18 @@ public class ReporteVentas extends javax.swing.JFrame {
                     .addGroup(panelsLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dtcFinal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(dtcInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnBuscarFechas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscarFechas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(16, 16, 16)
                         .addComponent(txtcodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        getContentPane().add(panels, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 100));
+        getContentPane().add(panels, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, -1));
 
         jPanel3.setBackground(new java.awt.Color(6, 3, 9));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 160, 10));
-
-        btnMotrarDetalleDeCompra.setBackground(new java.awt.Color(153, 255, 153));
-        btnMotrarDetalleDeCompra.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnMotrarDetalleDeCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/add_30px.png"))); // NOI18N
-        btnMotrarDetalleDeCompra.setText("Ver Detalle");
-        btnMotrarDetalleDeCompra.setBorder(null);
-        btnMotrarDetalleDeCompra.setBorderPainted(false);
-        btnMotrarDetalleDeCompra.setOpaque(true);
-        btnMotrarDetalleDeCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMotrarDetalleDeCompraMouseClicked(evt);
-            }
-        });
-        btnMotrarDetalleDeCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMotrarDetalleDeCompraActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnMotrarDetalleDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 140, 30));
 
         txtCodigoVenta.setForeground(new java.awt.Color(255, 255, 255));
         txtCodigoVenta.setText("jLabel4");
@@ -337,54 +262,43 @@ public class ReporteVentas extends javax.swing.JFrame {
         });
         jPanel3.add(btnRegresarAReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 40, 49));
 
-        jButton1.setText("EXPORTAR A PDF");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 140, 30));
-
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 160, 540));
 
         jPanel2.setBackground(new java.awt.Color(6, 3, 9));
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Importe Total De Ventas Realizdas");
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        txtImporteTotal.setEditable(false);
-        txtImporteTotal.setBackground(new java.awt.Color(6, 3, 9));
-        txtImporteTotal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtImporteTotal.setForeground(new java.awt.Color(51, 255, 0));
-        txtImporteTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtImporteTotal.setBorder(null);
+        btnMotrarDetalleDeCompra.setBackground(new java.awt.Color(250, 183, 27));
+        btnMotrarDetalleDeCompra.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnMotrarDetalleDeCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/delete_20px.png"))); // NOI18N
+        btnMotrarDetalleDeCompra.setText("Cancelar Venta");
+        btnMotrarDetalleDeCompra.setBorder(null);
+        btnMotrarDetalleDeCompra.setBorderPainted(false);
+        btnMotrarDetalleDeCompra.setOpaque(true);
+        btnMotrarDetalleDeCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMotrarDetalleDeCompraMouseClicked(evt);
+            }
+        });
+        btnMotrarDetalleDeCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotrarDetalleDeCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(820, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(76, 76, 76))
+                .addContainerGap(655, Short.MAX_VALUE)
+                .addComponent(btnMotrarDetalleDeCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(505, 505, 505))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(btnMotrarDetalleDeCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 620, 1300, 110));
@@ -434,23 +348,18 @@ public class ReporteVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_RegresarActionPerformed
 
     private void btnBuscarFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFechasActionPerformed
-        buscarFechaRVenta();
+     //   buscarFechaRVenta();
     }//GEN-LAST:event_btnBuscarFechasActionPerformed
 
     private void btnMotrarDetalleDeCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMotrarDetalleDeCompraMouseClicked
-        buscarDetalleRVenta();
-        btnMotrarDetalleDeCompra.setVisible(false);
-        btnRegresarAReportes.setVisible(true);
-        jScrollPane2.setVisible(true);
-        jScrollPane1.setVisible(false);
-        calculatTotal();
+       
     }//GEN-LAST:event_btnMotrarDetalleDeCompraMouseClicked
 
     private void btnRegresarAReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarAReportesActionPerformed
         jScrollPane2.setVisible(false);
         jScrollPane1.setVisible(true);
         btnRegresarAReportes.setVisible(false);
-        calculatTotal();
+     //   calculatTotal();
     }//GEN-LAST:event_btnRegresarAReportesActionPerformed
 
     private void tblReporteVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReporteVentaMouseClicked
@@ -472,48 +381,26 @@ public class ReporteVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_panelsMouseDragged
 
     private void btnMotrarDetalleDeCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotrarDetalleDeCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMotrarDetalleDeCompraActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Document documento = new Document();
-        try {
-            String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_Ventas.pdf"));
-            documento.open();
-
-            PdfPTable tablas = new PdfPTable(5);
-            tablas.addCell("Codigo Venta");
-            tablas.addCell("Empleado");
-            tablas.addCell("Fecha De Venta");
-            tablas.addCell("Cliente");
-            tablas.addCell("Importe Total");
-
-
-            try {
-                cone.consulta("select * from RC");
-                Object dato[] = new Object[5];
-
-                if (cone.getRs().next()) {
-
-                    do {
-                        tablas.addCell(cone.getRs().getString(1));
-                        tablas.addCell(cone.getRs().getString(2));
-                        tablas.addCell(cone.getRs().getString(3));
-                        tablas.addCell(cone.getRs().getString(4));
-                        tablas.addCell(cone.getRs().getString(5));
-                    } while (cone.getRs().next());
-                    documento.add(tablas);
-                }
-
-            } catch (DocumentException | SQLException e) {
+        int fila=tblReporteVenta.getSelectedRow();
+        if(fila<0){
+            JOptionPane.showMessageDialog(null, "Ninguna venta seleccionada.","Error",JOptionPane.ERROR_MESSAGE);
+        }else{
+                conexion con=new conexion();
+                CallableStatement cc;
+                try{
+                cc=con.getCon().prepareCall("{call actualizar_boleta(?)}");
+                cc.setString(1, tblReporteVenta.getValueAt(fila, 0).toString());
+                int respuesta = cc.executeUpdate();
+                if (respuesta == 1) {
+                        JOptionPane.showMessageDialog(null, "Boleta cancelada.","Advertencia",JOptionPane.WARNING_MESSAGE);
+                    }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,"ERROR INGRESO VENTA"+ e.getMessage());
             }
-            documento.close();
-            JOptionPane.showMessageDialog(null, "Reporte Creado");
-
-        } catch (DocumentException | HeadlessException | FileNotFoundException e) {
+                
+            listarRVenta();    
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnMotrarDetalleDeCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -532,20 +419,21 @@ public class ReporteVentas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReporteVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReporteVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReporteVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReporteVentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Devolucion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReporteVentas().setVisible(true);
+                new Devolucion().setVisible(true);
             }
         });
     }
@@ -555,27 +443,19 @@ public class ReporteVentas extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnBuscarFechas;
     private javax.swing.JToggleButton btnMotrarDetalleDeCompra;
     private javax.swing.JToggleButton btnRegresarAReportes;
-    private com.toedter.calendar.JDateChooser dtcFinal;
-    private com.toedter.calendar.JDateChooser dtcInicio;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JPanel panels;
     private javax.swing.JTable tbDetalleReporteVenta;
     private javax.swing.JTable tblReporteVenta;
     private javax.swing.JLabel txtCodigoVenta;
-    private javax.swing.JTextField txtImporteTotal;
     private javax.swing.JLabel txtcodigo;
     // End of variables declaration//GEN-END:variables
-
+/*
     void calculatTotal() {
         DecimalFormat df = new DecimalFormat("#.##");
         try {
@@ -605,5 +485,5 @@ public class ReporteVentas extends javax.swing.JFrame {
         editor.setEditable(false);
         editor2.setEditable(false);
     }
-
+*/
 }

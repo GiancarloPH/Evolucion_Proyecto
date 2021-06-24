@@ -53,6 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnVentas = new javax.swing.JToggleButton();
         btnCerrarSesion = new javax.swing.JToggleButton();
+        btnDevolucion = new javax.swing.JToggleButton();
         MENU = new javax.swing.JPanel();
         txtUsuario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -93,7 +94,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btn3rayitas.setToolTipText("");
         btn3rayitas.setBorder(null);
         btn3rayitas.setContentAreaFilled(false);
-        btn3rayitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn3rayitas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn3rayitas.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btn3rayitas.setHideActionText(true);
         btn3rayitas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -121,7 +122,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnRcompras.setToolTipText("");
         btnRcompras.setBorder(null);
         btnRcompras.setContentAreaFilled(false);
-        btnRcompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRcompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRcompras.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnRcompras.setHideActionText(true);
         btnRcompras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -140,7 +141,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnRventas.setToolTipText("");
         btnRventas.setBorder(null);
         btnRventas.setContentAreaFilled(false);
-        btnRventas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRventas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRventas.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnRventas.setHideActionText(true);
         btnRventas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -159,7 +160,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnReportes.setToolTipText("");
         btnReportes.setBorder(null);
         btnReportes.setContentAreaFilled(false);
-        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnReportes.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnReportes.setHideActionText(true);
         btnReportes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -178,7 +179,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnProveedores.setToolTipText("");
         btnProveedores.setBorder(null);
         btnProveedores.setContentAreaFilled(false);
-        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProveedores.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnProveedores.setHideActionText(true);
         btnProveedores.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -197,7 +198,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEmpleados.setToolTipText("");
         btnEmpleados.setBorder(null);
         btnEmpleados.setContentAreaFilled(false);
-        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEmpleados.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnEmpleados.setHideActionText(true);
         btnEmpleados.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -216,7 +217,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCompras.setToolTipText("");
         btnCompras.setBorder(null);
         btnCompras.setContentAreaFilled(false);
-        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCompras.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnCompras.setHideActionText(true);
         btnCompras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -235,7 +236,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnProductos.setToolTipText("");
         btnProductos.setBorder(null);
         btnProductos.setContentAreaFilled(false);
-        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnProductos.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnProductos.setHideActionText(true);
         btnProductos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -253,7 +254,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnVentas.setToolTipText("");
         btnVentas.setBorder(null);
         btnVentas.setContentAreaFilled(false);
-        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVentas.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnVentas.setHideActionText(true);
         btnVentas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -272,7 +273,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCerrarSesion.setToolTipText("");
         btnCerrarSesion.setBorder(null);
         btnCerrarSesion.setContentAreaFilled(false);
-        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrarSesion.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         btnCerrarSesion.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
         btnCerrarSesion.setHideActionText(true);
@@ -286,11 +287,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnDevolucion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnDevolucion.setForeground(new java.awt.Color(255, 255, 255));
+        btnDevolucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/management_30px.png"))); // NOI18N
+        btnDevolucion.setText("Devoluciones");
+        btnDevolucion.setToolTipText("");
+        btnDevolucion.setBorder(null);
+        btnDevolucion.setContentAreaFilled(false);
+        btnDevolucion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnDevolucion.setDisabledSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/shopping_cart_35px.png"))); // NOI18N
+        btnDevolucion.setHideActionText(true);
+        btnDevolucion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDevolucion.setIconTextGap(25);
+        btnDevolucion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/management_35px.png"))); // NOI18N
+        btnDevolucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolucionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,6 +331,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(btnRcompras, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnDevolucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,7 +365,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnRventas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnRcompras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDevolucion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(btnCerrarSesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -554,6 +580,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
      
     }//GEN-LAST:event_btn3rayitasMouseClicked
 
+    private void btnDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionActionPerformed
+        Devolucion obj = new Devolucion();
+        obj.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnDevolucionActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -591,6 +623,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn3rayitas;
     private javax.swing.JToggleButton btnCerrarSesion;
     private javax.swing.JToggleButton btnCompras;
+    private javax.swing.JToggleButton btnDevolucion;
     private javax.swing.JToggleButton btnEmpleados;
     private javax.swing.JToggleButton btnProductos;
     private javax.swing.JToggleButton btnProveedores;
